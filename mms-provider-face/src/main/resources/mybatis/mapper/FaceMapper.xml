@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.why.dev.mms.face.dao.FaceMapper">
+
+    <!-- 数据库与JavaBean关系映射 -->
+    <resultMap id="BaseResultMap" type="com.why.dev.mms.face.pojo.Face">
+        <id column="FACE_ID" jdbcType="VARCHAR" property="faceId"/>
+        <result column="FACE_USER_ID" jdbcType="VARCHAR" property="faceUserId"/>
+        <result column="FACE_USER_NICKNAME" jdbcType="VARCHAR" property="faceUserNickname"/>
+        <result column="FACE_USER_NAME" jdbcType="VARCHAR" property="faceUserName"/>
+        <result column="FACE_AGE" jdbcType="INTEGER" property="faceAge"/>
+        <result column="FACE_GENDER" jdbcType="INTEGER" property="faceGender"/>
+        <result column="FACE_FEATURE" jdbcType="BLOB" property="faceFeature"/>
+        <result column="FACE_ISDEL" jdbcType="INTEGER" property="faceIsdel"/>
+        <result column="FACE_CREATED_NICKNAME" jdbcType="VARCHAR" property="faceCreatedNickname"/>
+        <result column="FACE_CREATED_TIME" jdbcType="TIMESTAMP" property="faceCreatedTime"/>
+        <result column="FACE_UPDATED_NICKNAME" jdbcType="VARCHAR" property="faceUpdatedNickname"/>
+        <result column="FACE_UPDATED_TIME" jdbcType="TIMESTAMP" property="faceUpdatedTime"/>
+        <result column="FACE_REMARKS" jdbcType="VARCHAR" property="faceRemarks"/>
+    </resultMap>
+
+    <!-- sql语句通用字段 -->
+    <sql id="Base_Column_List">
+        FACE_ID, FACE_USER_ID, FACE_USER_NICKNAME, FACE_USER_NAME, FACE_AGE, FACE_GENDER, FACE_FEATURE,
+        FACE_ISDEL, FACE_CREATED_NICKNAME, FACE_CREATED_TIME, FACE_UPDATED_NICKNAME, FACE_UPDATED_TIME,
+        FACE_REMARKS
+    </sql>
+
+    <!-- 动态添加的sql实现，动态拼接sql语句，若属性不为空，则拼接入sql语句；否则不进行拼接 -->
+    <insert id="insertSelective" parameterType="com.why.dev.mms.face.pojo.Face">
+        insert into FACE
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="faceId != null">
+                FACE_ID,
+            </if>
+            <if test="faceUserId != null">
+                FACE_USER_ID,
+            </if>
+            <if test="faceUserNickname != null">
+                FACE_USER_NICKNAME,
+            </if>
+            <if test="faceUserName != null">
+                FACE_USER_NAME,
+            </if>
+            <if test="faceAge != null">
+                FACE_AGE,
+            </if>
+            <if test="faceGender != null">
+                FACE_GENDER,
+            </if>
+            <if test="faceFeature != null">
+                FACE_FEATURE,
+            </if>
+            <if test="faceIsdel != null">
+                FACE_ISDEL,
+            </if>
+            <if test="faceCreatedNickname != null">
+                FACE_CREATED_NICKNAME,
+            </if>
+            <if test="faceCreatedTime != null">
+                FACE_CREATED_TIME,
+            </if>
+            <if test="faceUpdatedNickname != null">
+                FACE_UPDATED_NICKNAME,
+            </if>
+            <if test="faceUpdatedTime != null">
+                FACE_UPDATED_TIME,
+            </if>
+            <if test="faceRemarks != null">
+                FACE_REMARKS,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="faceId != null">
+                #{faceId,jdbcType=VARCHAR},
+            </if>
+            <if test="faceUserId != null">
+                #{faceUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="faceUserNickname != null">
+                #{faceUserNickname,jdbcType=VARCHAR},
+            </if>
+            <if test="faceUserName != null">
+                #{faceUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="faceAge != null">
+                #{faceAge,jdbcType=INTEGER},
+            </if>
+            <if test="faceGender != null">
+                #{faceGender,jdbcType=INTEGER},
+            </if>
+            <if test="faceFeature != null">
+                #{faceFeature,jdbcType=BLOB},
+            </if>
+            <if test="faceIsdel != null">
+                #{faceIsdel,jdbcType=INTEGER},
+            </if>
+            <if test="faceCreatedNickname != null">
+                #{faceCreatedNickname,jdbcType=VARCHAR},
+            </if>
+            <if test="faceCreatedTime != null">
+                #{faceCreatedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="faceUpdatedNickname != null">
+                #{faceUpdatedNickname,jdbcType=VARCHAR},
+            </if>
+            <if test="faceUpdatedTime != null">
+                #{faceUpdatedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="faceRemarks != null">
+                #{faceRemarks,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <!-- 主键删除的sql实现 -->
+    <update id="deleteByPrimaryKey" parameterType="java.lang.String">
+        update FACE
+        set FACE_ISDEL = 0
+        where FACE_ID = #{faceId,jdbcType=VARCHAR}
+    </update>
+
+    <!-- 动态拼接sql语句，进行动态修改 -->
+    <update id="updateByPrimaryKeySelective" parameterType="com.why.dev.mms.face.pojo.Face">
+        update FACE
+        <set>
+            <if test="faceUserId != null">
+                FACE_USER_ID = #{faceUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="faceUserNickname != null">
+                FACE_USER_NICKNAME = #{faceUserNickname,jdbcType=VARCHAR},
+            </if>
+            <if test="faceUserName != null">
+                FACE_USER_NAME = #{faceUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="faceAge != null">
+                FACE_AGE = #{faceAge,jdbcType=INTEGER},
+            </if>
+            <if test="faceGender != null">
+                FACE_GENDER = #{faceGender,jdbcType=INTEGER},
+            </if>
+            <if test="faceFeature != null">
+                FACE_FEATURE = #{faceFeature,jdbcType=BLOB},
+            </if>
+            <if test="faceIsdel != null">
+                FACE_ISDEL = #{faceIsdel,jdbcType=INTEGER},
+            </if>
+            <if test="faceCreatedNickname != null">
+                FACE_CREATED_NICKNAME = #{faceCreatedNickname,jdbcType=VARCHAR},
+            </if>
+            <if test="faceCreatedTime != null">
+                FACE_CREATED_TIME = #{faceCreatedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="faceUpdatedNickname != null">
+                FACE_UPDATED_NICKNAME = #{faceUpdatedNickname,jdbcType=VARCHAR},
+            </if>
+            <if test="faceUpdatedTime != null">
+                FACE_UPDATED_TIME = #{faceUpdatedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="faceRemarks != null">
+                FACE_REMARKS = #{faceRemarks,jdbcType=VARCHAR},
+            </if>
+            <if test="faceFeature != null">
+                FACE_FEATURE = #{faceFeature,jdbcType=LONGVARBINARY},
+            </if>
+        </set>
+        where FACE_ID = #{faceId,jdbcType=VARCHAR}
+    </update>
+
+    <!-- 主键查询的sql实现 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from FACE
+        where FACE_ID = #{faceId,jdbcType=VARCHAR} and FACE_ISDEL = 1
+    </select>
+
+    <!-- 获取所有的集合sql实现 -->
+    <select id="findAllFace" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from FACE
+        where FACE_ISDEL = 1
+        order by FACE_USER_NICKNAME
+    </select>
+</mapper>
