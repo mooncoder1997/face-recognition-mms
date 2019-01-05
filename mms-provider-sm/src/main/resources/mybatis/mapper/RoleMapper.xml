@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.why.dev.mms.sm.dao.RoleMapper">
+
+    <!-- 数据库与JavaBean关系映射 -->
+    <resultMap id="BaseResultMap" type="com.why.dev.mms.sm.pojo.Role">
+        <id column="ROLE_ID" property="roleId" jdbcType="VARCHAR"/>
+        <result column="ROLE_NAME" property="roleName" jdbcType="VARCHAR"/>
+        <result column="ROLE_ISDEL" property="roleIsdel" jdbcType="INTEGER"/>
+        <result column="ROLE_CREATED_NICKNAME" property="roleCreatedNickname" jdbcType="VARCHAR"/>
+        <result column="ROLE_CREATED_TIME" property="roleCreatedTime" jdbcType="TIMESTAMP"/>
+        <result column="ROLE_UPDATED_NICKNAME" property="roleUpdatedNickname" jdbcType="VARCHAR"/>
+        <result column="ROLE_UPDATED_TIME" property="roleUpdatedTime" jdbcType="TIMESTAMP"/>
+        <result column="ROLE_REMARKS" property="roleRemarks" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!-- sql语句通用字段 -->
+    <sql id="Base_Column_List">
+        ROLE_ID, ROLE_NAME, ROLE_ISDEL, ROLE_CREATED_NICKNAME, ROLE_CREATED_TIME, ROLE_UPDATED_NICKNAME,
+        ROLE_UPDATED_TIME, ROLE_REMARKS
+    </sql>
+
+    <!-- 动态添加的sql实现，动态拼接sql语句，若属性不为空，则拼接入sql语句；否则不进行拼接 -->
+    <insert id="insertSelective" parameterType="com.why.dev.mms.sm.pojo.Role">
+        insert into SM_ROLE
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="roleId != null">
+                ROLE_ID,
+            </if>
+            <if test="roleName != null">
+                ROLE_NAME,
+            </if>
+            <if test="roleIsdel != null">
+                ROLE_ISDEL,
+            </if>
+            <if test="roleCreatedNickname != null">
+                ROLE_CREATED_NICKNAME,
+            </if>
+            <if test="roleCreatedTime != null">
+                ROLE_CREATED_TIME,
+            </if>
+            <if test="roleUpdatedNickname != null">
+                ROLE_UPDATED_NICKNAME,
+            </if>
+            <if test="roleUpdatedTime != null">
+                ROLE_UPDATED_TIME,
+            </if>
+            <if test="roleRemarks != null">
+                ROLE_REMARKS,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="roleId != null">
+                #{roleId,jdbcType=VARCHAR},
+            </if>
+            <if test="roleName != null">
+                #{roleName,jdbcType=VARCHAR},
+            </if>
+            <if test="roleIsdel != null">
+                #{roleIsdel,jdbcType=INTEGER},
+            </if>
+            <if test="roleCreatedNickname != null">
+                #{roleCreatedNickname,jdbcType=VARCHAR},
+            </if>
+            <if test="roleCreatedTime != null">
+                #{roleCreatedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="roleUpdatedNickname != null">
+                #{roleUpdatedNickname,jdbcType=VARCHAR},
+            </if>
+            <if test="roleUpdatedTime != null">
+                #{roleUpdatedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="roleRemarks != null">
+                #{roleRemarks,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <!-- 主键删除的sql实现 -->
+    <update id="deleteByPrimaryKey" parameterType="java.lang.String">
+        update SM_ROLE
+        set ROLE_ISDEL = 0
+        where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+    </update>
+
+    <!-- 动态拼接sql语句，进行动态修改 -->
+    <update id="updateByPrimaryKeySelective" parameterType="com.why.dev.mms.sm.pojo.Role">
+        update SM_ROLE
+        <set>
+            <if test="roleName != null">
+                ROLE_NAME = #{roleName,jdbcType=VARCHAR},
+            </if>
+            <if test="roleIsdel != null">
+                ROLE_ISDEL = #{roleIsdel,jdbcType=INTEGER},
+            </if>
+            <if test="roleCreatedNickname != null">
+                ROLE_CREATED_NICKNAME = #{roleCreatedNickname,jdbcType=VARCHAR},
+            </if>
+            <if test="roleCreatedTime != null">
+                ROLE_CREATED_TIME = #{roleCreatedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="roleUpdatedNickname != null">
+                ROLE_UPDATED_NICKNAME = #{roleUpdatedNickname,jdbcType=VARCHAR},
+            </if>
+            <if test="roleUpdatedTime != null">
+                ROLE_UPDATED_TIME = #{roleUpdatedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="roleRemarks != null">
+                ROLE_REMARKS = #{roleRemarks,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+    </update>
+
+    <!-- 主键查询的sql实现 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from SM_ROLE
+        where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectRoleNameByPrimiaryKey" resultType="java.lang.String" parameterType="java.lang.String">
+        select ROLE_NAME
+        from SM_ROLE
+        where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+    </select>
+
+    <!-- 获取所有的集合sql实现 -->
+    <select id="findAllRole" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from SM_ROLE
+        where ROLE_ISDEL = 1
+        order by ROLE_NAME
+    </select>
+</mapper>

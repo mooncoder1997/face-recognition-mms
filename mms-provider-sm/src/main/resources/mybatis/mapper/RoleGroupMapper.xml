@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.why.dev.mms.sm.dao.RoleGroupMapper">
+    <resultMap id="BaseResultMap" type="com.why.dev.mms.sm.pojo.RoleGroup">
+        <id column="ROLE_GROUP_ID" property="roleGroupId" jdbcType="VARCHAR"/>
+        <result column="ROLE_GROUP_ROLE_ID" property="roleGroupRoleId" jdbcType="VARCHAR"/>
+        <result column="ROLE_GROUP_MENU_ID" property="roleGroupMenuId" jdbcType="VARCHAR"/>
+        <result column="ROLE_GROUP_MENU_PERMISSION" property="roleGroupMenuPermission" jdbcType="VARCHAR"/>
+        <result column="ROLE_GROUP_ISDEL" property="roleGroupIsdel" jdbcType="INTEGER"/>
+        <result column="ROLE_GROUP_CREATED_NICKNAME" property="roleGroupCreatedNickname" jdbcType="VARCHAR"/>
+        <result column="ROLE_GROUP_CREATED_TIME" property="roleGroupCreatedTime" jdbcType="TIMESTAMP"/>
+        <result column="ROLE_GROUP_UPDATED_NICKNAME" property="roleGroupUpdatedNickname" jdbcType="VARCHAR"/>
+        <result column="ROLE_GROUP_UPDATED_TIME" property="roleGroupUpdatedTime" jdbcType="TIMESTAMP"/>
+        <result column="ROLE_GROUP_REMARKS" property="roleGroupRemarks" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    ROLE_GROUP_ID, ROLE_GROUP_ROLE_ID, ROLE_GROUP_MENU_ID, ROLE_GROUP_MENU_PERMISSION, 
+    ROLE_GROUP_ISDEL, ROLE_GROUP_CREATED_NICKNAME, ROLE_GROUP_CREATED_TIME, ROLE_GROUP_UPDATED_NICKNAME, 
+    ROLE_GROUP_UPDATED_TIME, ROLE_GROUP_REMARKS
+  </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from SM_ROLE_GROUP
+        where ROLE_GROUP_ID = #{roleGroupId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from SM_ROLE_GROUP
+    where ROLE_GROUP_ID = #{roleGroupId,jdbcType=VARCHAR}
+  </delete>
+
+
+    <insert id="insertSelective" parameterType="com.why.dev.mms.sm.pojo.RoleGroup">
+        insert into SM_ROLE_GROUP
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="roleGroupId != null">
+                ROLE_GROUP_ID,
+            </if>
+            <if test="roleGroupRoleId != null">
+                ROLE_GROUP_ROLE_ID,
+            </if>
+            <if test="roleGroupMenuId != null">
+                ROLE_GROUP_MENU_ID,
+            </if>
+            <if test="roleGroupMenuPermission != null">
+                ROLE_GROUP_MENU_PERMISSION,
+            </if>
+            <if test="roleGroupIsdel != null">
+                ROLE_GROUP_ISDEL,
+            </if>
+            <if test="roleGroupCreatedNickname != null">
+                ROLE_GROUP_CREATED_NICKNAME,
+            </if>
+            <if test="roleGroupCreatedTime != null">
+                ROLE_GROUP_CREATED_TIME,
+            </if>
+            <if test="roleGroupUpdatedNickname != null">
+                ROLE_GROUP_UPDATED_NICKNAME,
+            </if>
+            <if test="roleGroupUpdatedTime != null">
+                ROLE_GROUP_UPDATED_TIME,
+            </if>
+            <if test="roleGroupRemarks != null">
+                ROLE_GROUP_REMARKS,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="roleGroupId != null">
+                #{roleGroupId,jdbcType=VARCHAR},
+            </if>
+            <if test="roleGroupRoleId != null">
+                #{roleGroupRoleId,jdbcType=VARCHAR},
+            </if>
+            <if test="roleGroupMenuId != null">
+                #{roleGroupMenuId,jdbcType=VARCHAR},
+            </if>
+            <if test="roleGroupMenuPermission != null">
+                #{roleGroupMenuPermission,jdbcType=VARCHAR},
+            </if>
+            <if test="roleGroupIsdel != null">
+                #{roleGroupIsdel,jdbcType=INTEGER},
+            </if>
+            <if test="roleGroupCreatedNickname != null">
+                #{roleGroupCreatedNickname,jdbcType=VARCHAR},
+            </if>
+            <if test="roleGroupCreatedTime != null">
+                #{roleGroupCreatedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="roleGroupUpdatedNickname != null">
+                #{roleGroupUpdatedNickname,jdbcType=VARCHAR},
+            </if>
+            <if test="roleGroupUpdatedTime != null">
+                #{roleGroupUpdatedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="roleGroupRemarks != null">
+                #{roleGroupRemarks,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.why.dev.mms.sm.pojo.RoleGroup">
+        update SM_ROLE_GROUP
+        <set>
+            <if test="roleGroupRoleId != null">
+                ROLE_GROUP_ROLE_ID = #{roleGroupRoleId,jdbcType=VARCHAR},
+            </if>
+            <if test="roleGroupMenuId != null">
+                ROLE_GROUP_MENU_ID = #{roleGroupMenuId,jdbcType=VARCHAR},
+            </if>
+            <if test="roleGroupMenuPermission != null">
+                ROLE_GROUP_MENU_PERMISSION = #{roleGroupMenuPermission,jdbcType=VARCHAR},
+            </if>
+            <if test="roleGroupIsdel != null">
+                ROLE_GROUP_ISDEL = #{roleGroupIsdel,jdbcType=INTEGER},
+            </if>
+            <if test="roleGroupCreatedNickname != null">
+                ROLE_GROUP_CREATED_NICKNAME = #{roleGroupCreatedNickname,jdbcType=VARCHAR},
+            </if>
+            <if test="roleGroupCreatedTime != null">
+                ROLE_GROUP_CREATED_TIME = #{roleGroupCreatedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="roleGroupUpdatedNickname != null">
+                ROLE_GROUP_UPDATED_NICKNAME = #{roleGroupUpdatedNickname,jdbcType=VARCHAR},
+            </if>
+            <if test="roleGroupUpdatedTime != null">
+                ROLE_GROUP_UPDATED_TIME = #{roleGroupUpdatedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="roleGroupRemarks != null">
+                ROLE_GROUP_REMARKS = #{roleGroupRemarks,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ROLE_GROUP_ID = #{roleGroupId,jdbcType=VARCHAR}
+    </update>
+
+</mapper>

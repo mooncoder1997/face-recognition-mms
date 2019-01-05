@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.why.dev.mms.sm.dao.UserMapper">
+
+    <!-- 数据库与JavaBean关系映射 -->
+    <resultMap id="BaseResultMap" type="com.why.dev.mms.sm.pojo.User">
+        <id column="USER_ID" property="userId" jdbcType="VARCHAR"/>
+        <result column="USER_NICKNAME" property="userNickname" jdbcType="VARCHAR"/>
+        <result column="USER_PASSWORD" property="userPassword" jdbcType="VARCHAR"/>
+        <result column="USER_NAME" property="userName" jdbcType="VARCHAR"/>
+        <result column="USER_GENDER" property="userGender" jdbcType="INTEGER"/>
+        <result column="USER_EMAIL" property="userEmail" jdbcType="VARCHAR"/>
+        <result column="USER_MOBILE" property="userMobile" jdbcType="VARCHAR"/>
+        <result column="USER_ROLE_ID" property="userRoleId" jdbcType="VARCHAR"/>
+        <result column="USER_FACE_ID" property="userFaceId" jdbcType="VARCHAR"/>
+        <result column="USER_ISDEL" property="userIsdel" jdbcType="INTEGER"/>
+        <result column="USER_CREATED_NICKNAME" property="userCreatedNickname" jdbcType="VARCHAR"/>
+        <result column="USER_CREATED_TIME" property="userCreatedTime" jdbcType="TIMESTAMP"/>
+        <result column="USER_UPDATED_NICKNAME" property="userUpdatedNickname" jdbcType="VARCHAR"/>
+        <result column="USER_UPDATED_TIME" property="userUpdatedTime" jdbcType="TIMESTAMP"/>
+        <result column="USER_REMARKS" property="userRemarks" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!-- sql语句通用字段 -->
+    <sql id="Base_Column_List">
+        USER_ID, USER_NICKNAME, USER_PASSWORD, USER_NAME, USER_GENDER, USER_EMAIL, USER_MOBILE,
+        USER_ROLE_ID, USER_FACE_ID, USER_ISDEL, USER_CREATED_NICKNAME, USER_CREATED_TIME,
+        USER_UPDATED_NICKNAME, USER_UPDATED_TIME, USER_REMARKS
+    </sql>
+
+    <!-- 动态添加的sql实现，动态拼接sql语句，若属性不为空，则拼接入sql语句；否则不进行拼接 -->
+    <insert id="insertSelective" parameterType="com.why.dev.mms.sm.pojo.User">
+        insert into SM_USER
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                USER_ID,
+            </if>
+            <if test="userNickname != null">
+                USER_NICKNAME,
+            </if>
+            <if test="userPassword != null">
+                USER_PASSWORD,
+            </if>
+            <if test="userName != null">
+                USER_NAME,
+            </if>
+            <if test="userGender != null">
+                USER_GENDER,
+            </if>
+            <if test="userEmail != null">
+                USER_EMAIL,
+            </if>
+            <if test="userMobile != null">
+                USER_MOBILE,
+            </if>
+            <if test="userRoleId != null">
+                USER_ROLE_ID,
+            </if>
+            <if test="userFaceId != null">
+                USER_FACE_ID,
+            </if>
+            <if test="userIsdel != null">
+                USER_ISDEL,
+            </if>
+            <if test="userCreatedNickname != null">
+                USER_CREATED_NICKNAME,
+            </if>
+            <if test="userCreatedTime != null">
+                USER_CREATED_TIME,
+            </if>
+            <if test="userUpdatedNickname != null">
+                USER_UPDATED_NICKNAME,
+            </if>
+            <if test="userUpdatedTime != null">
+                USER_UPDATED_TIME,
+            </if>
+            <if test="userRemarks != null">
+                USER_REMARKS,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="userNickname != null">
+                #{userNickname,jdbcType=VARCHAR},
+            </if>
+            <if test="userPassword != null">
+                #{userPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="userGender != null">
+                #{userGender,jdbcType=INTEGER},
+            </if>
+            <if test="userEmail != null">
+                #{userEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="userMobile != null">
+                #{userMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="userRoleId != null">
+                #{userRoleId,jdbcType=VARCHAR},
+            </if>
+            <if test="userFaceId != null">
+                #{userFaceId,jdbcType=VARCHAR},
+            </if>
+            <if test="userIsdel != null">
+                #{userIsdel,jdbcType=INTEGER},
+            </if>
+            <if test="userCreatedNickname != null">
+                #{userCreatedNickname,jdbcType=VARCHAR},
+            </if>
+            <if test="userCreatedTime != null">
+                #{userCreatedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userUpdatedNickname != null">
+                #{userUpdatedNickname,jdbcType=VARCHAR},
+            </if>
+            <if test="userUpdatedTime != null">
+                #{userUpdatedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userRemarks != null">
+                #{userRemarks,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <!-- 主键删除的sql实现 -->
+    <update id="deleteByPrimaryKey" parameterType="java.lang.String">
+        update SM_USER
+        set USER_ISDEL = 0
+        where USER_ID = #{userId,jdbcType=VARCHAR}
+    </update>
+
+    <!-- 动态拼接sql语句，进行动态修改 -->
+    <update id="updateByPrimaryKeySelective" parameterType="com.why.dev.mms.sm.pojo.User">
+        update SM_USER
+        <set>
+            <if test="userNickname != null">
+                USER_NICKNAME = #{userNickname,jdbcType=VARCHAR},
+            </if>
+            <if test="userPassword != null">
+                USER_PASSWORD = #{userPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="userName != null">
+                USER_NAME = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="userGender != null">
+                USER_GENDER = #{userGender,jdbcType=INTEGER},
+            </if>
+            <if test="userEmail != null">
+                USER_EMAIL = #{userEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="userMobile != null">
+                USER_MOBILE = #{userMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="userRoleId != null">
+                USER_ROLE_ID = #{userRoleId,jdbcType=VARCHAR},
+            </if>
+            <if test="userFaceId != null">
+                USER_FACE_ID = #{userFaceId,jdbcType=VARCHAR},
+            </if>
+            <if test="userIsdel != null">
+                USER_ISDEL = #{userIsdel,jdbcType=INTEGER},
+            </if>
+            <if test="userCreatedNickname != null">
+                USER_CREATED_NICKNAME = #{userCreatedNickname,jdbcType=VARCHAR},
+            </if>
+            <if test="userCreatedTime != null">
+                USER_CREATED_TIME = #{userCreatedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userUpdatedNickname != null">
+                USER_UPDATED_NICKNAME = #{userUpdatedNickname,jdbcType=VARCHAR},
+            </if>
+            <if test="userUpdatedTime != null">
+                USER_UPDATED_TIME = #{userUpdatedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userRemarks != null">
+                USER_REMARKS = #{userRemarks,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where USER_ID = #{userId,jdbcType=VARCHAR}
+    </update>
+
+    <!-- 主键查询的sql实现 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from SM_USER
+        where USER_ID = #{userId,jdbcType=VARCHAR}
+    </select>
+
+    <!-- 获取所有的集合sql实现 -->
+    <select id="findAllUser" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from SM_USER
+        where USER_ISDEL = 1
+        order by USER_NICKNAME
+    </select>
+</mapper>
