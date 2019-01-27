@@ -22,7 +22,7 @@ import com.why.dev.mms.sm.dto.UserLoginDTO;
  */
 public class JWTUtil {
     public String getToken(UserLoginDTO userLoginDTO) {
-        return JWT.create().withAudience(userLoginDTO.getUserNickname())
+        return JWT.create().withAudience(userLoginDTO.getUserId())
                 .sign(Algorithm.HMAC256(userLoginDTO.getUserPassword()));
     }
 }
