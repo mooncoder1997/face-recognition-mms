@@ -11,7 +11,7 @@ import java.util.Date;
 
 /**
  * ClassName: UserInfoVO
- * Description: TODO ADD REASON
+ * Description: 封装显示在前端的用户信息
  * Date: 2019/1/3 8:16 PM
  *
  * @author Wang, Haoyue
@@ -20,8 +20,6 @@ import java.util.Date;
  */
 public class UserInfoVO {
     private String userId;
-
-    private String userNickname;
 
     private String userName;
 
@@ -33,11 +31,11 @@ public class UserInfoVO {
 
     private String userRoleName;
 
-    private String userCreatedNickname;
+    private String userCreatedId;
 
     private Date userCreatedTime;
 
-    private String userUpdatedNickname;
+    private String userUpdatedId;
 
     private Date userUpdatedTime;
 
@@ -46,17 +44,16 @@ public class UserInfoVO {
     public UserInfoVO() {
     }
 
-    public UserInfoVO(String userId, String userNickname, String userName, Integer userGender, String userEmail, String userMobile, String userRoleName, String userCreatedNickname, Date userCreatedTime, String userUpdatedNickname, Date userUpdatedTime, String userRemarks) {
+    public UserInfoVO(String userId, String userName, Integer userGender, String userEmail, String userMobile, String userRoleName, String userCreatedId, Date userCreatedTime, String userUpdatedId, Date userUpdatedTime, String userRemarks) {
         this.userId = userId;
-        this.userNickname = userNickname;
         this.userName = userName;
         this.userGender = userGender;
         this.userEmail = userEmail;
         this.userMobile = userMobile;
         this.userRoleName = userRoleName;
-        this.userCreatedNickname = userCreatedNickname;
+        this.userCreatedId = userCreatedId;
         this.userCreatedTime = userCreatedTime;
-        this.userUpdatedNickname = userUpdatedNickname;
+        this.userUpdatedId = userUpdatedId;
         this.userUpdatedTime = userUpdatedTime;
         this.userRemarks = userRemarks;
     }
@@ -67,14 +64,6 @@ public class UserInfoVO {
 
     public void setUserId(String userId) {
         this.userId = userId;
-    }
-
-    public String getUserNickname() {
-        return userNickname;
-    }
-
-    public void setUserNickname(String userNickname) {
-        this.userNickname = userNickname;
     }
 
     public String getUserName() {
@@ -117,12 +106,12 @@ public class UserInfoVO {
         this.userRoleName = userRoleName;
     }
 
-    public String getUserCreatedNickname() {
-        return userCreatedNickname;
+    public String getUserCreatedId() {
+        return userCreatedId;
     }
 
-    public void setUserCreatedNickname(String userCreatedNickname) {
-        this.userCreatedNickname = userCreatedNickname;
+    public void setUserCreatedId(String userCreatedId) {
+        this.userCreatedId = userCreatedId;
     }
 
     public Date getUserCreatedTime() {
@@ -133,12 +122,12 @@ public class UserInfoVO {
         this.userCreatedTime = userCreatedTime;
     }
 
-    public String getUserUpdatedNickname() {
-        return userUpdatedNickname;
+    public String getUserUpdatedId() {
+        return userUpdatedId;
     }
 
-    public void setUserUpdatedNickname(String userUpdatedNickname) {
-        this.userUpdatedNickname = userUpdatedNickname;
+    public void setUserUpdatedId(String userUpdatedId) {
+        this.userUpdatedId = userUpdatedId;
     }
 
     public Date getUserUpdatedTime() {
@@ -161,15 +150,14 @@ public class UserInfoVO {
     public String toString() {
         return "UserInfoVO{" +
                 "userId='" + userId + '\'' +
-                ", userNickname='" + userNickname + '\'' +
                 ", userName='" + userName + '\'' +
                 ", userGender=" + userGender +
                 ", userEmail='" + userEmail + '\'' +
                 ", userMobile='" + userMobile + '\'' +
                 ", userRoleName='" + userRoleName + '\'' +
-                ", userCreatedNickname='" + userCreatedNickname + '\'' +
+                ", userCreatedId='" + userCreatedId + '\'' +
                 ", userCreatedTime=" + userCreatedTime +
-                ", userUpdatedNickname='" + userUpdatedNickname + '\'' +
+                ", userUpdatedId='" + userUpdatedId + '\'' +
                 ", userUpdatedTime=" + userUpdatedTime +
                 ", userRemarks='" + userRemarks + '\'' +
                 '}';

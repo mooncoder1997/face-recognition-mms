@@ -8,6 +8,7 @@
 package com.why.dev.mms.sm.controller;
 
 import com.why.dev.mms.sm.dto.ResponseResult;
+import com.why.dev.mms.sm.dto.UserLoginDTO;
 import com.why.dev.mms.sm.pojo.User;
 import com.why.dev.mms.sm.service.UserService;
 import io.swagger.annotations.Api;
@@ -26,41 +27,75 @@ import org.springframework.web.bind.annotation.*;
  */
 @Slf4j
 @RestController
-@RequestMapping("/v1/user/")
+@RequestMapping("/api/v1/user/")
 @Api(value = "UserController", description = "User module API")
 public class UserController {
 
     @Autowired
     UserService userService;
 
+    /**
+     * addUser: 插入一条用户信息
+     *
+     * @param user
+     * @return
+     */
     @RequestMapping(value = "user", method = RequestMethod.POST)
     public ResponseResult addUser(@RequestBody User user) {
         log.info("[UserController] addUser() 进入添加用户信息方法");
         return userService.addUser(user);
     }
 
+    /**
+     * deleteUser: 删除一条用户信息
+     *
+     * @param userId
+     * @return
+     */
     @RequestMapping(value = "user/{userId}", method = RequestMethod.DELETE)
     public ResponseResult deleteUser(@PathVariable("userId") String userId) {
         log.info("[UserController] deleteUser() 进入删除用户信息方法");
         return userService.deleteUser(userId);
     }
 
+    /**
+     * updateUser: 更新用户信息
+     *
+     * @param user
+     * @return
+     */
     @RequestMapping(value = "user", method = RequestMethod.PUT)
     public ResponseResult updateUser(@RequestBody User user) {
-        log.info("[FaceController] updateUser() 进入更新面部信息方法");
+        log.info("[UserController] updateUser() 进入更新用户信息方法");
         return userService.updateUser(user);
     }
 
+    /**
+     * queryOne: 查询一条用户信息
+     *
+     * @param userId
+     * @return
+     */
     @RequestMapping(value = "user/{userId}", method = RequestMethod.GET)
     public ResponseResult queryOne(@PathVariable("userId") String userId) {
-        log.info("[FaceController] queryOne() 进入查询用户信息方法");
+        log.info("[UserController] queryOne() 进入查询用户信息方法");
         return userService.queryUser(userId);
     }
 
+    /**
+     * queryAll: 查询所有用户信息
+     *
+     * @return
+     */
     @RequestMapping(value = "user", method = RequestMethod.GET)
     public ResponseResult queryAll() {
-        log.info("[FaceController] queryAll() 进入查询所有用户信息方法");
+        log.info("[UserController] queryAll() 进入查询所有用户信息方法");
         return userService.queryAllUsers();
     }
 
+    @RequestMapping(value = "login", method = RequestMethod.PUT)
+    public ResponseResult login(@RequestBody UserLoginDTO userLoginDTO) {
+        log.info("[UserController] login() 进入用户登陆方法");
+        return userService.userLogin(userLoginDTO);
+    }
 }

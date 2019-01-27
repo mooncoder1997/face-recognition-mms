@@ -47,6 +47,9 @@ public class StatusCode {
     /** [GET] 用户请求的格式不可得 */
     public final static Integer ERROR_NOT_ACCEPTABLE = 406;
 
+    /** 用户请求的资源被删除 */
+    public final static Integer ERROR_GONE = 410;
+
     /** [*] 服务器发生错误 */
     public final static Integer ERROR_INTERNAL_SERVER_ERROR = 500;
 }

@@ -6,7 +6,6 @@
     <resultMap id="BaseResultMap" type="com.why.dev.mms.sm.pojo.User">
         <id column="USER_ID" property="userId" jdbcType="VARCHAR"/>
         <result column="USER_NICKNAME" property="userNickname" jdbcType="VARCHAR"/>
-        <result column="USER_PASSWORD" property="userPassword" jdbcType="VARCHAR"/>
         <result column="USER_NAME" property="userName" jdbcType="VARCHAR"/>
         <result column="USER_GENDER" property="userGender" jdbcType="INTEGER"/>
         <result column="USER_EMAIL" property="userEmail" jdbcType="VARCHAR"/>
@@ -14,18 +13,18 @@
         <result column="USER_ROLE_ID" property="userRoleId" jdbcType="VARCHAR"/>
         <result column="USER_FACE_ID" property="userFaceId" jdbcType="VARCHAR"/>
         <result column="USER_ISDEL" property="userIsdel" jdbcType="INTEGER"/>
-        <result column="USER_CREATED_NICKNAME" property="userCreatedNickname" jdbcType="VARCHAR"/>
+        <result column="USER_CREATED_ID" property="userCreatedNickname" jdbcType="VARCHAR"/>
         <result column="USER_CREATED_TIME" property="userCreatedTime" jdbcType="TIMESTAMP"/>
-        <result column="USER_UPDATED_NICKNAME" property="userUpdatedNickname" jdbcType="VARCHAR"/>
+        <result column="USER_UPDATED_ID" property="userUpdatedNickname" jdbcType="VARCHAR"/>
         <result column="USER_UPDATED_TIME" property="userUpdatedTime" jdbcType="TIMESTAMP"/>
         <result column="USER_REMARKS" property="userRemarks" jdbcType="VARCHAR"/>
     </resultMap>
 
     <!-- sql语句通用字段 -->
     <sql id="Base_Column_List">
-        USER_ID, USER_NICKNAME, USER_PASSWORD, USER_NAME, USER_GENDER, USER_EMAIL, USER_MOBILE,
-        USER_ROLE_ID, USER_FACE_ID, USER_ISDEL, USER_CREATED_NICKNAME, USER_CREATED_TIME,
-        USER_UPDATED_NICKNAME, USER_UPDATED_TIME, USER_REMARKS
+        USER_ID, USER_NICKNAME, USER_NAME, USER_GENDER, USER_EMAIL, USER_MOBILE,
+        USER_ROLE_ID, USER_FACE_ID, USER_ISDEL, USER_CREATED_ID, USER_CREATED_TIME,
+        USER_UPDATED_ID, USER_UPDATED_TIME, USER_REMARKS
     </sql>
 
     <!-- 动态添加的sql实现，动态拼接sql语句，若属性不为空，则拼接入sql语句；否则不进行拼接 -->
@@ -34,9 +33,6 @@
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="userId != null">
                 USER_ID,
-            </if>
-            <if test="userNickname != null">
-                USER_NICKNAME,
             </if>
             <if test="userPassword != null">
                 USER_PASSWORD,
@@ -62,14 +58,14 @@
             <if test="userIsdel != null">
                 USER_ISDEL,
             </if>
-            <if test="userCreatedNickname != null">
-                USER_CREATED_NICKNAME,
+            <if test="userCreatedId != null">
+                USER_CREATED_ID,
             </if>
             <if test="userCreatedTime != null">
                 USER_CREATED_TIME,
             </if>
-            <if test="userUpdatedNickname != null">
-                USER_UPDATED_NICKNAME,
+            <if test="userUpdatedId != null">
+                USER_UPDATED_ID,
             </if>
             <if test="userUpdatedTime != null">
                 USER_UPDATED_TIME,
@@ -81,9 +77,6 @@
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="userId != null">
                 #{userId,jdbcType=VARCHAR},
-            </if>
-            <if test="userNickname != null">
-                #{userNickname,jdbcType=VARCHAR},
             </if>
             <if test="userPassword != null">
                 #{userPassword,jdbcType=VARCHAR},
@@ -109,14 +102,14 @@
             <if test="userIsdel != null">
                 #{userIsdel,jdbcType=INTEGER},
             </if>
-            <if test="userCreatedNickname != null">
-                #{userCreatedNickname,jdbcType=VARCHAR},
+            <if test="userCreatedId != null">
+                #{userCreatedId,jdbcType=VARCHAR},
             </if>
             <if test="userCreatedTime != null">
                 #{userCreatedTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="userUpdatedNickname != null">
-                #{userUpdatedNickname,jdbcType=VARCHAR},
+            <if test="userUpdatedId != null">
+                #{userUpdatedId,jdbcType=VARCHAR},
             </if>
             <if test="userUpdatedTime != null">
                 #{userUpdatedTime,jdbcType=TIMESTAMP},
@@ -138,9 +131,6 @@
     <update id="updateByPrimaryKeySelective" parameterType="com.why.dev.mms.sm.pojo.User">
         update SM_USER
         <set>
-            <if test="userNickname != null">
-                USER_NICKNAME = #{userNickname,jdbcType=VARCHAR},
-            </if>
             <if test="userPassword != null">
                 USER_PASSWORD = #{userPassword,jdbcType=VARCHAR},
             </if>
@@ -165,14 +155,14 @@
             <if test="userIsdel != null">
                 USER_ISDEL = #{userIsdel,jdbcType=INTEGER},
             </if>
-            <if test="userCreatedNickname != null">
-                USER_CREATED_NICKNAME = #{userCreatedNickname,jdbcType=VARCHAR},
+            <if test="userCreatedId != null">
+                USER_CREATED_ID = #{userCreatedId,jdbcType=VARCHAR},
             </if>
             <if test="userCreatedTime != null">
                 USER_CREATED_TIME = #{userCreatedTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="userUpdatedNickname != null">
-                USER_UPDATED_NICKNAME = #{userUpdatedNickname,jdbcType=VARCHAR},
+            <if test="userUpdatedId != null">
+                USER_UPDATED_ID = #{userUpdatedId,jdbcType=VARCHAR},
             </if>
             <if test="userUpdatedTime != null">
                 USER_UPDATED_TIME = #{userUpdatedTime,jdbcType=TIMESTAMP},
@@ -189,7 +179,7 @@
         select
         <include refid="Base_Column_List"/>
         from SM_USER
-        where USER_ID = #{userId,jdbcType=VARCHAR}
+        where USER_ID = #{userId,jdbcType=VARCHAR} and USER_ISDEL = 1
     </select>
 
     <!-- 获取所有的集合sql实现 -->
@@ -198,6 +188,6 @@
         <include refid="Base_Column_List"/>
         from SM_USER
         where USER_ISDEL = 1
-        order by USER_NICKNAME
+        order by USER_ID
     </select>
 </mapper>

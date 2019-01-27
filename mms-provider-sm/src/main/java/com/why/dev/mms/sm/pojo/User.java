@@ -21,8 +21,6 @@ import java.util.Date;
 public class User {
     private String userId;
 
-    private String userNickname;
-
     private String userPassword;
 
     private String userName;
@@ -39,30 +37,42 @@ public class User {
 
     private Integer userIsdel;
 
-    private String userCreatedNickname;
+    private String userCreatedId;
 
     private Date userCreatedTime;
 
-    private String userUpdatedNickname;
+    private String userUpdatedId;
 
     private Date userUpdatedTime;
 
     private String userRemarks;
+
+    public User() {
+    }
+
+    public User(String userId, String userPassword, String userName, Integer userGender, String userEmail, String userMobile, String userRoleId, String userFaceId, Integer userIsdel, String userCreatedId, Date userCreatedTime, String userUpdatedId, Date userUpdatedTime, String userRemarks) {
+        this.userId = userId;
+        this.userPassword = userPassword;
+        this.userName = userName;
+        this.userGender = userGender;
+        this.userEmail = userEmail;
+        this.userMobile = userMobile;
+        this.userRoleId = userRoleId;
+        this.userFaceId = userFaceId;
+        this.userIsdel = userIsdel;
+        this.userCreatedId = userCreatedId;
+        this.userCreatedTime = userCreatedTime;
+        this.userUpdatedId = userUpdatedId;
+        this.userUpdatedTime = userUpdatedTime;
+        this.userRemarks = userRemarks;
+    }
 
     public String getUserId() {
         return userId;
     }
 
     public void setUserId(String userId) {
-        this.userId = userId == null ? null : userId.trim();
-    }
-
-    public String getUserNickname() {
-        return userNickname;
-    }
-
-    public void setUserNickname(String userNickname) {
-        this.userNickname = userNickname == null ? null : userNickname.trim();
+        this.userId = userId;
     }
 
     public String getUserPassword() {
@@ -70,7 +80,7 @@ public class User {
     }
 
     public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword == null ? null : userPassword.trim();
+        this.userPassword = userPassword;
     }
 
     public String getUserName() {
@@ -78,7 +88,7 @@ public class User {
     }
 
     public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
+        this.userName = userName;
     }
 
     public Integer getUserGender() {
@@ -94,7 +104,7 @@ public class User {
     }
 
     public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail == null ? null : userEmail.trim();
+        this.userEmail = userEmail;
     }
 
     public String getUserMobile() {
@@ -102,7 +112,7 @@ public class User {
     }
 
     public void setUserMobile(String userMobile) {
-        this.userMobile = userMobile == null ? null : userMobile.trim();
+        this.userMobile = userMobile;
     }
 
     public String getUserRoleId() {
@@ -110,7 +120,7 @@ public class User {
     }
 
     public void setUserRoleId(String userRoleId) {
-        this.userRoleId = userRoleId == null ? null : userRoleId.trim();
+        this.userRoleId = userRoleId;
     }
 
     public String getUserFaceId() {
@@ -118,7 +128,7 @@ public class User {
     }
 
     public void setUserFaceId(String userFaceId) {
-        this.userFaceId = userFaceId == null ? null : userFaceId.trim();
+        this.userFaceId = userFaceId;
     }
 
     public Integer getUserIsdel() {
@@ -129,12 +139,12 @@ public class User {
         this.userIsdel = userIsdel;
     }
 
-    public String getUserCreatedNickname() {
-        return userCreatedNickname;
+    public String getUserCreatedId() {
+        return userCreatedId;
     }
 
-    public void setUserCreatedNickname(String userCreatedNickname) {
-        this.userCreatedNickname = userCreatedNickname == null ? null : userCreatedNickname.trim();
+    public void setUserCreatedId(String userCreatedId) {
+        this.userCreatedId = userCreatedId;
     }
 
     public Date getUserCreatedTime() {
@@ -145,12 +155,12 @@ public class User {
         this.userCreatedTime = userCreatedTime;
     }
 
-    public String getUserUpdatedNickname() {
-        return userUpdatedNickname;
+    public String getUserUpdatedId() {
+        return userUpdatedId;
     }
 
-    public void setUserUpdatedNickname(String userUpdatedNickname) {
-        this.userUpdatedNickname = userUpdatedNickname == null ? null : userUpdatedNickname.trim();
+    public void setUserUpdatedId(String userUpdatedId) {
+        this.userUpdatedId = userUpdatedId;
     }
 
     public Date getUserUpdatedTime() {
@@ -166,14 +176,13 @@ public class User {
     }
 
     public void setUserRemarks(String userRemarks) {
-        this.userRemarks = userRemarks == null ? null : userRemarks.trim();
+        this.userRemarks = userRemarks;
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "userId='" + userId + '\'' +
-                ", userNickname='" + userNickname + '\'' +
                 ", userPassword='" + userPassword + '\'' +
                 ", userName='" + userName + '\'' +
                 ", userGender=" + userGender +
@@ -182,9 +191,9 @@ public class User {
                 ", userRoleId='" + userRoleId + '\'' +
                 ", userFaceId='" + userFaceId + '\'' +
                 ", userIsdel=" + userIsdel +
-                ", userCreatedNickname='" + userCreatedNickname + '\'' +
+                ", userCreatedId='" + userCreatedId + '\'' +
                 ", userCreatedTime=" + userCreatedTime +
-                ", userUpdatedNickname='" + userUpdatedNickname + '\'' +
+                ", userUpdatedId='" + userUpdatedId + '\'' +
                 ", userUpdatedTime=" + userUpdatedTime +
                 ", userRemarks='" + userRemarks + '\'' +
                 '}';

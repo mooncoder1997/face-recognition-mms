@@ -118,13 +118,13 @@
         select
         <include refid="Base_Column_List"/>
         from SM_ROLE
-        where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+        where ROLE_ID = #{roleId,jdbcType=VARCHAR} and ROLE_ISDEL = 1
     </select>
 
     <select id="selectRoleNameByPrimiaryKey" resultType="java.lang.String" parameterType="java.lang.String">
         select ROLE_NAME
         from SM_ROLE
-        where ROLE_ID = #{roleId,jdbcType=VARCHAR}
+        where ROLE_ID = #{roleId,jdbcType=VARCHAR} and ROLE_ISDEL = 1
     </select>
 
     <!-- 获取所有的集合sql实现 -->

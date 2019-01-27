@@ -8,6 +8,7 @@
 package com.why.dev.mms.sm.service;
 
 import com.why.dev.mms.sm.dto.ResponseResult;
+import com.why.dev.mms.sm.dto.UserLoginDTO;
 import com.why.dev.mms.sm.pojo.User;
 
 /**
@@ -29,4 +30,6 @@ public interface UserService {
     ResponseResult queryUser(String userId);
 
     ResponseResult queryAllUsers();
+
+    ResponseResult userLogin(UserLoginDTO userLoginDTO);
 }
