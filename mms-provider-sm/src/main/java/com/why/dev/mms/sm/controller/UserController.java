@@ -93,7 +93,13 @@ public class UserController {
         return userService.queryAllUsers();
     }
 
-    @RequestMapping(value = "login", method = RequestMethod.PUT)
+    /**
+     * login: 用户登陆
+     *
+     * @param userLoginDTO
+     * @return
+     */
+    @RequestMapping(value = "login", method = RequestMethod.POST)
     public ResponseResult login(@RequestBody UserLoginDTO userLoginDTO) {
         log.info("[UserController] login() 进入用户登陆方法");
         return userService.userLogin(userLoginDTO);

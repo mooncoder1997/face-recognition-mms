@@ -18,39 +18,39 @@ package com.why.dev.mms.sm.dto;
  */
 public class UserLoginDTO {
 
-    private String userId;
+    private String username;
 
-    private String userPassword;
+    private String password;
 
     public UserLoginDTO() {
     }
 
-    public UserLoginDTO(String userId, String userPassword) {
-        this.userId = userId;
-        this.userPassword = userPassword;
+    public UserLoginDTO(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getUserPassword() {
-        return userPassword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
     public String toString() {
         return "UserLoginDTO{" +
-                "userId='" + userId + '\'' +
-                ", userPassword='" + userPassword + '\'' +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
                 '}';
     }
 }

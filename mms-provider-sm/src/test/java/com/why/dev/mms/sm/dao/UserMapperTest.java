@@ -31,7 +31,6 @@ public class UserMapperTest {
     public void testInsertSelective() {
         User user = new User();
         user.setUserId(UUID.randomUUID().toString().replace("-",""));
-        user.setUserNickname("Wang, Haoyue");
         user.setUserName("王皓月");
         user.setUserPassword("123456");
         user.setUserGender(0);
@@ -39,7 +38,7 @@ public class UserMapperTest {
         user.setUserMobile("18630881233");
         user.setUserRoleId(UUID.randomUUID().toString().replace("-",""));
         user.setUserFaceId("F0000000000000000000000000000001");
-        user.setUserCreatedNickname("Wang, Haoyue");
+        user.setUserCreatedId("U000000001");
         int result = userMapper.insertSelective(user);
         Assert.assertEquals(1, result);
         log.info("[UserMapperTest] testInsertSelective 成功插入了" + result + "条用户信息");

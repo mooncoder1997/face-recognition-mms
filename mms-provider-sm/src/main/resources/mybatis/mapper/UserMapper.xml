@@ -5,7 +5,7 @@
     <!-- 数据库与JavaBean关系映射 -->
     <resultMap id="BaseResultMap" type="com.why.dev.mms.sm.pojo.User">
         <id column="USER_ID" property="userId" jdbcType="VARCHAR"/>
-        <result column="USER_NICKNAME" property="userNickname" jdbcType="VARCHAR"/>
+        <result column="USER_PASSWORD" property="userPassword" jdbcType="VARCHAR"/>
         <result column="USER_NAME" property="userName" jdbcType="VARCHAR"/>
         <result column="USER_GENDER" property="userGender" jdbcType="INTEGER"/>
         <result column="USER_EMAIL" property="userEmail" jdbcType="VARCHAR"/>
@@ -13,16 +13,16 @@
         <result column="USER_ROLE_ID" property="userRoleId" jdbcType="VARCHAR"/>
         <result column="USER_FACE_ID" property="userFaceId" jdbcType="VARCHAR"/>
         <result column="USER_ISDEL" property="userIsdel" jdbcType="INTEGER"/>
-        <result column="USER_CREATED_ID" property="userCreatedNickname" jdbcType="VARCHAR"/>
+        <result column="USER_CREATED_ID" property="userCreatedId" jdbcType="VARCHAR"/>
         <result column="USER_CREATED_TIME" property="userCreatedTime" jdbcType="TIMESTAMP"/>
-        <result column="USER_UPDATED_ID" property="userUpdatedNickname" jdbcType="VARCHAR"/>
+        <result column="USER_UPDATED_ID" property="userUpdatedId" jdbcType="VARCHAR"/>
         <result column="USER_UPDATED_TIME" property="userUpdatedTime" jdbcType="TIMESTAMP"/>
         <result column="USER_REMARKS" property="userRemarks" jdbcType="VARCHAR"/>
     </resultMap>
 
     <!-- sql语句通用字段 -->
     <sql id="Base_Column_List">
-        USER_ID, USER_NICKNAME, USER_NAME, USER_GENDER, USER_EMAIL, USER_MOBILE,
+        USER_ID, USER_PASSWORD, USER_NAME, USER_GENDER, USER_EMAIL, USER_MOBILE,
         USER_ROLE_ID, USER_FACE_ID, USER_ISDEL, USER_CREATED_ID, USER_CREATED_TIME,
         USER_UPDATED_ID, USER_UPDATED_TIME, USER_REMARKS
     </sql>

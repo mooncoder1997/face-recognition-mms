@@ -78,7 +78,7 @@ public class UserServiceImpl implements UserService {
      *
      * @param userId
      * @return  成功: {true, "删除用户信息成功", 204}
-     *          失败: {false, "参数为空", 400}, {false, "用户不存在", 500}
+     *          失败: {false, "参数为空", 400}, {false, "用户不存在", 410}
      */
     @Override
     public ResponseResult deleteUser(String userId) {
@@ -123,7 +123,7 @@ public class UserServiceImpl implements UserService {
      *
      * @param userId
      * @return  成功: {faceInfoVO, true, "查询用户信息成功", 200}
-     *          失败: {false, "参数为空", 400}, {false, "用户不存在", 500}
+     *          失败: {false, "参数为空", 400}, {false, "用户不存在", 410}
      */
     @Override
     public ResponseResult queryUser(String userId) {
@@ -146,7 +146,7 @@ public class UserServiceImpl implements UserService {
      * queryAllUsers: 查询所有用户信息
      *
      * @return  成功: {userInfoVOList, true, "查询用户信息成功", 200}
-     *          失败: {false, "没有查到用户信息", 500}
+     *          失败: {false, "没有查到用户信息", 410}
      */
     @Override
     public ResponseResult queryAllUsers() {
@@ -165,22 +165,29 @@ public class UserServiceImpl implements UserService {
         return new ResponseResult(userInfoVOList, true, "查询用户信息成功", StatusCode.SUCCESS_GET);
     }
 
+    /**
+     * userLogin: 用户登陆
+     *
+     * @param userLoginDTO
+     * @return  成功: {userInfoVO, true, "登陆成功", 201}
+     *          失败: {false, "参数为空", 400}, {false, "用户不存在", 410}, {false, "密码不正确", 401}
+     */
     @Override
     public ResponseResult userLogin(UserLoginDTO userLoginDTO) {
         log.info("[UserServiceImpl] userLogin() 进入用户登陆方法");
         if (userLoginDTO == null) {
             log.info("[UserServiceImpl] userLogin() userLoginDTO为空，不能登陆");
             return new ResponseResult(false, "参数为空", StatusCode.ERROR_INVALID_RREQUEST);
-        } else if (StringUtils.isBlank(userLoginDTO.getUserId()) || StringUtils.isBlank(userLoginDTO.getUserPassword())) {
+        } else if (StringUtils.isBlank(userLoginDTO.getUsername()) || StringUtils.isBlank(userLoginDTO.getPassword())) {
             log.info("[UserServiceImpl] userLogin() 用户名或密码为空");
             return new ResponseResult(false, "参数为空", StatusCode.ERROR_INVALID_RREQUEST);
         }
-        User user = userMapper.selectByPrimaryKey(userLoginDTO.getUserId());
+        User user = userMapper.selectByPrimaryKey(userLoginDTO.getUsername());
         if (user == null) {
-            log.info("[UserServiceImpl] userLogin() 用户不存在，userId: " + userLoginDTO.getUserId());
+            log.info("[UserServiceImpl] userLogin() 用户不存在，userId: " + userLoginDTO.getUsername());
             return new ResponseResult(false, "用户不存在", StatusCode.ERROR_GONE);
         }
-        if (!userLoginDTO.getUserPassword().equals(user.getUserPassword())) {
+        if (!userLoginDTO.getPassword().equals(user.getUserPassword())) {
             log.info("[UserServiceImpl] userLogin() 密码错误,登陆失败");
             return new ResponseResult(false, "密码不正确", StatusCode.ERROR_UNAUTHORIZED);
         }
