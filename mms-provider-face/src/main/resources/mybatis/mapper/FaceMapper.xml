@@ -6,23 +6,21 @@
     <resultMap id="BaseResultMap" type="com.why.dev.mms.face.pojo.Face">
         <id column="FACE_ID" jdbcType="VARCHAR" property="faceId"/>
         <result column="FACE_USER_ID" jdbcType="VARCHAR" property="faceUserId"/>
-        <result column="FACE_USER_NICKNAME" jdbcType="VARCHAR" property="faceUserNickname"/>
-        <result column="FACE_USER_NAME" jdbcType="VARCHAR" property="faceUserName"/>
         <result column="FACE_AGE" jdbcType="INTEGER" property="faceAge"/>
         <result column="FACE_GENDER" jdbcType="INTEGER" property="faceGender"/>
         <result column="FACE_FEATURE" jdbcType="BLOB" property="faceFeature"/>
         <result column="FACE_ISDEL" jdbcType="INTEGER" property="faceIsdel"/>
-        <result column="FACE_CREATED_NICKNAME" jdbcType="VARCHAR" property="faceCreatedNickname"/>
+        <result column="FACE_CREATED_ID" jdbcType="VARCHAR" property="faceCreatedId"/>
         <result column="FACE_CREATED_TIME" jdbcType="TIMESTAMP" property="faceCreatedTime"/>
-        <result column="FACE_UPDATED_NICKNAME" jdbcType="VARCHAR" property="faceUpdatedNickname"/>
+        <result column="FACE_UPDATED_ID" jdbcType="VARCHAR" property="faceUpdatedId"/>
         <result column="FACE_UPDATED_TIME" jdbcType="TIMESTAMP" property="faceUpdatedTime"/>
         <result column="FACE_REMARKS" jdbcType="VARCHAR" property="faceRemarks"/>
     </resultMap>
 
     <!-- sql语句通用字段 -->
     <sql id="Base_Column_List">
-        FACE_ID, FACE_USER_ID, FACE_USER_NICKNAME, FACE_USER_NAME, FACE_AGE, FACE_GENDER, FACE_FEATURE,
-        FACE_ISDEL, FACE_CREATED_NICKNAME, FACE_CREATED_TIME, FACE_UPDATED_NICKNAME, FACE_UPDATED_TIME,
+        FACE_ID, FACE_USER_ID, FACE_AGE, FACE_GENDER, FACE_FEATURE,
+        FACE_ISDEL, FACE_CREATED_TIME, FACE_CREATED_TIME, FACE_UPDATED_ID, FACE_UPDATED_TIME,
         FACE_REMARKS
     </sql>
 
@@ -36,12 +34,6 @@
             <if test="faceUserId != null">
                 FACE_USER_ID,
             </if>
-            <if test="faceUserNickname != null">
-                FACE_USER_NICKNAME,
-            </if>
-            <if test="faceUserName != null">
-                FACE_USER_NAME,
-            </if>
             <if test="faceAge != null">
                 FACE_AGE,
             </if>
@@ -54,14 +46,14 @@
             <if test="faceIsdel != null">
                 FACE_ISDEL,
             </if>
-            <if test="faceCreatedNickname != null">
-                FACE_CREATED_NICKNAME,
+            <if test="faceCreatedId != null">
+                FACE_CREATED_ID,
             </if>
             <if test="faceCreatedTime != null">
                 FACE_CREATED_TIME,
             </if>
-            <if test="faceUpdatedNickname != null">
-                FACE_UPDATED_NICKNAME,
+            <if test="faceUpdatedId != null">
+                FACE_UPDATED_ID,
             </if>
             <if test="faceUpdatedTime != null">
                 FACE_UPDATED_TIME,
@@ -77,12 +69,6 @@
             <if test="faceUserId != null">
                 #{faceUserId,jdbcType=VARCHAR},
             </if>
-            <if test="faceUserNickname != null">
-                #{faceUserNickname,jdbcType=VARCHAR},
-            </if>
-            <if test="faceUserName != null">
-                #{faceUserName,jdbcType=VARCHAR},
-            </if>
             <if test="faceAge != null">
                 #{faceAge,jdbcType=INTEGER},
             </if>
@@ -95,14 +81,14 @@
             <if test="faceIsdel != null">
                 #{faceIsdel,jdbcType=INTEGER},
             </if>
-            <if test="faceCreatedNickname != null">
-                #{faceCreatedNickname,jdbcType=VARCHAR},
+            <if test="faceCreatedId != null">
+                #{faceCreatedId,jdbcType=VARCHAR},
             </if>
             <if test="faceCreatedTime != null">
                 #{faceCreatedTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="faceUpdatedNickname != null">
-                #{faceUpdatedNickname,jdbcType=VARCHAR},
+            <if test="faceUpdatedId != null">
+                #{faceUpdatedId,jdbcType=VARCHAR},
             </if>
             <if test="faceUpdatedTime != null">
                 #{faceUpdatedTime,jdbcType=TIMESTAMP},
@@ -127,12 +113,6 @@
             <if test="faceUserId != null">
                 FACE_USER_ID = #{faceUserId,jdbcType=VARCHAR},
             </if>
-            <if test="faceUserNickname != null">
-                FACE_USER_NICKNAME = #{faceUserNickname,jdbcType=VARCHAR},
-            </if>
-            <if test="faceUserName != null">
-                FACE_USER_NAME = #{faceUserName,jdbcType=VARCHAR},
-            </if>
             <if test="faceAge != null">
                 FACE_AGE = #{faceAge,jdbcType=INTEGER},
             </if>
@@ -145,14 +125,14 @@
             <if test="faceIsdel != null">
                 FACE_ISDEL = #{faceIsdel,jdbcType=INTEGER},
             </if>
-            <if test="faceCreatedNickname != null">
-                FACE_CREATED_NICKNAME = #{faceCreatedNickname,jdbcType=VARCHAR},
+            <if test="faceCreatedId != null">
+                FACE_CREATED_ID = #{faceCreatedId,jdbcType=VARCHAR},
             </if>
             <if test="faceCreatedTime != null">
                 FACE_CREATED_TIME = #{faceCreatedTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="faceUpdatedNickname != null">
-                FACE_UPDATED_NICKNAME = #{faceUpdatedNickname,jdbcType=VARCHAR},
+            <if test="faceUpdatedId != null">
+                FACE_UPDATED_ID = #{faceUpdatedId,jdbcType=VARCHAR},
             </if>
             <if test="faceUpdatedTime != null">
                 FACE_UPDATED_TIME = #{faceUpdatedTime,jdbcType=TIMESTAMP},
@@ -181,6 +161,6 @@
         <include refid="Base_Column_List"/>
         from FACE
         where FACE_ISDEL = 1
-        order by FACE_USER_NICKNAME
+        order by FACE_USER_ID
     </select>
 </mapper>

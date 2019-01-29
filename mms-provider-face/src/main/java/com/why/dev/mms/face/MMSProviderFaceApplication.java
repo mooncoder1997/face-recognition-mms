@@ -10,6 +10,7 @@ package com.why.dev.mms.face;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.netflix.feign.EnableFeignClients;
 
 /**
  * ClassName: MMSProviderFaceApplication
@@ -20,7 +21,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  * @version V1.0
  * @since JDK 1.8
  */
-@EnableDiscoveryClient
+@EnableFeignClients
 @SpringBootApplication
 public class MMSProviderFaceApplication {
     public static void main(String[] args) {

@@ -10,9 +10,11 @@ package com.why.dev.mms.face.service.impl;
 import com.arcsoft.face.*;
 import com.arcsoft.face.enums.ImageFormat;
 import com.google.common.collect.Lists;
+import com.netflix.discovery.converters.Auto;
 import com.why.dev.mms.face.common.StatusCode;
 import com.why.dev.mms.face.dao.FaceMapper;
 import com.why.dev.mms.face.dto.*;
+import com.why.dev.mms.face.feign.SMFeign;
 import com.why.dev.mms.face.pojo.Face;
 import com.why.dev.mms.face.service.FaceService;
 import com.why.dev.mms.face.util.FaceEngineFactory;
@@ -22,6 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.pool2.impl.GenericObjectPool;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
@@ -51,6 +54,9 @@ public class FaceServiceImpl implements FaceService {
 
     @Resource
     private FaceMapper faceMapper;
+
+    @Autowired
+    private SMFeign smFeign;
 
     @Value("${arcsoft.sdk.face.app-id}")
     public String appId;
@@ -98,14 +104,12 @@ public class FaceServiceImpl implements FaceService {
                 Face face = new Face();
                 face.setFaceId(faceDto.getFaceId());
                 face.setFaceUserId(faceDto.getFaceUserId());
-                face.setFaceUserNickname(faceDto.getFaceUserNickname());
-                face.setFaceUserName(faceDto.getFaceUserName());
                 face.setFaceAge(faceFeatureDto.getFaceAge());
                 face.setFaceGender(faceFeatureDto.getFaceGender());
                 face.setFaceFeature(faceFeatureDto.getFeaceFeature());
-                face.setFaceCreatedNickname(faceDto.getFaceCreatedNickname());
-                if (faceDto.getFaceUpdatedNickname() != null) {
-                    face.setFaceUpdatedNickname(faceDto.getFaceUpdatedNickname());
+                face.setFaceCreatedId(faceDto.getFaceCreatedId());
+                if (faceDto.getFaceUpdatedId() != null) {
+                    face.setFaceUpdatedId(faceDto.getFaceUpdatedId());
                 }
                 if (faceDto.getFaceRemarks() != null) {
                     face.setFaceRemarks(faceDto.getFaceRemarks());
@@ -218,8 +222,6 @@ public class FaceServiceImpl implements FaceService {
         Face face = new Face();
         face.setFaceId(faceDto.getFaceId());
         face.setFaceUserId(faceDto.getFaceUserId());
-        face.setFaceUserNickname(faceDto.getFaceUserNickname());
-        face.setFaceUserName(faceDto.getFaceUserName());
         if (!StringUtils.isBlank(faceDto.getFaceFeature())) {
             log.info("[FaceServiceImpl] updateFace() 更新面部特征信息");
             FaceFeatureDto faceFeatureDto = extractFaceFeature(Base64.getDecoder().decode(faceDto.getFaceFeature()));
@@ -240,7 +242,7 @@ public class FaceServiceImpl implements FaceService {
         } else {
            log.info("[FaceServiceImpl] updateFace() 不需要更新面部特征信息");
         }
-        face.setFaceUpdatedNickname("Wang, Haoyue");
+        face.setFaceUpdatedId("U000000001");
         if (faceDto.getFaceRemarks() != null) {
             face.setFaceRemarks(faceDto.getFaceRemarks());
         }
@@ -271,17 +273,7 @@ public class FaceServiceImpl implements FaceService {
             log.info("[FaceServiceImpl] queryFace() 没有查询到此面部信息，faceId: " + faceId);
             return new ResponseResult(false, "没有查询到此面部信息", StatusCode.OPERATIONERROR);
         }
-        FaceInfoVO faceInfoVO = new FaceInfoVO();
-        faceInfoVO.setFaceId(face.getFaceId());
-        faceInfoVO.setFaceUserNickname(face.getFaceUserNickname());
-        faceInfoVO.setFaceUserName(face.getFaceUserName());
-        faceInfoVO.setFaceAge(face.getFaceAge());
-        faceInfoVO.setFaceGender(face.getFaceGender());
-        faceInfoVO.setFaceCreatedNickname(face.getFaceCreatedNickname());
-        faceInfoVO.setFaceCreatedTime(face.getFaceCreatedTime());
-        faceInfoVO.setFaceUpdatedNickname(face.getFaceUpdatedNickname());
-        faceInfoVO.setFaceUpdatedTime(face.getFaceUpdatedTime());
-        faceInfoVO.setFaceRemarks(face.getFaceRemarks());
+        FaceInfoVO faceInfoVO = faceToFaceInfoVO(face);
         log.info("[FaceServiceImpl] queryFace() 查询面部信息成功");
         return new ResponseResult(faceInfoVO, true, "查询面部信息成功", StatusCode.SUCCESS_GET);
     }
@@ -302,21 +294,41 @@ public class FaceServiceImpl implements FaceService {
         }
         List<FaceInfoVO> faceInfoVOList = new ArrayList<>();
         for (Face face : faceList) {
-            FaceInfoVO faceInfoVO = new FaceInfoVO();
-            faceInfoVO.setFaceId(face.getFaceId());
-            faceInfoVO.setFaceUserNickname(face.getFaceUserNickname());
-            faceInfoVO.setFaceUserName(face.getFaceUserName());
-            faceInfoVO.setFaceAge(face.getFaceAge());
-            faceInfoVO.setFaceGender(face.getFaceGender());
-            faceInfoVO.setFaceCreatedNickname(face.getFaceCreatedNickname());
-            faceInfoVO.setFaceCreatedTime(face.getFaceCreatedTime());
-            faceInfoVO.setFaceUpdatedNickname(face.getFaceUpdatedNickname());
-            faceInfoVO.setFaceUpdatedTime(face.getFaceUpdatedTime());
-            faceInfoVO.setFaceRemarks(face.getFaceRemarks());
-            faceInfoVOList.add(faceInfoVO);
+            faceInfoVOList.add(faceToFaceInfoVO(face));
         }
         log.info("[FaceServiceImpl] queryAllFaces() 查询所有面部信息成功");
         return new ResponseResult(faceInfoVOList, true, "查询面部信息成功", StatusCode.SUCCESS_GET);
+    }
+
+    /**
+     * faceLogin: 刷脸登陆
+     *
+     * @param faceBase64Dto
+     * @return
+     */
+    @Override
+    public ResponseResult faceLogin(FaceBase64Dto faceBase64Dto) {
+        log.info("[FaceServiceImpl] faceLogin() 进入刷脸登陆方法");
+        ResponseResult result = null;
+        try {
+            result = compareFace(faceBase64Dto);
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+            return new ResponseResult(false, "刷脸登陆失败", StatusCode.OPERATIONERROR);
+        }
+        if (!result.isSuccess()) {
+            return result;
+        }
+        FaceCompareDto faceCompareDto = (FaceCompareDto) result.getData();
+        String faceUserId = faceCompareDto.getFaceUserId();
+        log.info("[FaceServiceImpl] faceLogin() 匹配到的用户编号为: " + faceUserId);
+        ResponseResult remoteResult = smFeign.getUserInfoByUserId(faceUserId);
+        if (!remoteResult.isSuccess()) {
+            log.info("[FaceServiceImpl] faceLogin() 获取用户信息失败");
+            return new ResponseResult(false, "获取用户信息失败", StatusCode.OPERATIONERROR);
+        }
+        log.info("[FaceServiceImpl] faceLogin() 刷脸登陆成功");
+        return new ResponseResult(remoteResult.getData(), true, "刷脸登陆成功", StatusCode.SUCCESS_POST_PUT_PATCH);
     }
 
     /**
@@ -374,11 +386,24 @@ public class FaceServiceImpl implements FaceService {
         return null;
     }
 
+    private FaceInfoVO faceToFaceInfoVO(Face face) {
+        FaceInfoVO faceInfoVO = new FaceInfoVO();
+        faceInfoVO.setFaceId(face.getFaceId());
+        faceInfoVO.setFaceUserId(face.getFaceUserId());
+        faceInfoVO.setFaceAge(face.getFaceAge());
+        faceInfoVO.setFaceGender(face.getFaceGender());
+        faceInfoVO.setFaceCreatedId(face.getFaceCreatedId());
+        faceInfoVO.setFaceCreatedTime(face.getFaceCreatedTime());
+        faceInfoVO.setFaceUpdatedId(face.getFaceUpdatedId());
+        faceInfoVO.setFaceUpdatedTime(face.getFaceUpdatedTime());
+        faceInfoVO.setFaceRemarks(face.getFaceRemarks());
+        return faceInfoVO;
+    }
+
     private class CompareFaceTask implements Callable<List<FaceCompareDto>> {
 
         private List<Face> faceList;
         private FaceFeature targetFaceFeature;
-
 
         public CompareFaceTask(List<Face> faceList, FaceFeature targetFaceFeature) {
             this.faceList = faceList;
@@ -402,8 +427,6 @@ public class FaceServiceImpl implements FaceService {
                         FaceCompareDto faceCompareDto = new FaceCompareDto();
                         faceCompareDto.setFaceId(face.getFaceId());
                         faceCompareDto.setFaceUserId(face.getFaceUserId());
-                        faceCompareDto.setFaceUserNickname(face.getFaceUserNickname());
-                        faceCompareDto.setFaceUserName(face.getFaceUserName());
                         faceCompareDto.setSimilarValue(similarValue);
                         resultFaceCompareDtoList.add(faceCompareDto);
                     }

@@ -31,8 +31,7 @@ import java.util.concurrent.ExecutionException;
  */
 @Slf4j
 @RestController
-@RequestMapping("/v1/face/")
-@Api(value = "FaceController", description = "Face module API")
+@RequestMapping("/api/v1/face/")
 public class FaceController {
 
     @Autowired
@@ -45,7 +44,6 @@ public class FaceController {
      *
      * @return
      */
-    @ApiOperation(value = "addFace", notes = "Use this API to add a new face.")
     @RequestMapping(value = "face", method = RequestMethod.POST)
     public ResponseResult addFace(@RequestBody FaceDto faceDto) {
         log.info("[FaceController] addFace() 进入添加面部信息方法");
@@ -70,8 +68,6 @@ public class FaceController {
      * @param faceId
      * @return
      */
-    @ApiOperation(value = "deleteFace", notes = "传入面部信息编号faceId，删除该用户的人脸信息.")
-    @ApiImplicitParam(paramType = "path", name = "用户名", value = "userName", required = true, dataType = "String")
     @RequestMapping(value = "face/{faceId}", method = RequestMethod.DELETE)
     public ResponseResult deleteFace(@PathVariable("faceId") String faceId) {
         log.info("[FaceController] deleteFace() 进入删除面部信息方法");
@@ -84,7 +80,6 @@ public class FaceController {
      * @param faceDto
      * @return
      */
-    @ApiOperation(value = "updateFace", notes = "Use this API to update a face by userName.")
     @RequestMapping(value = "face", method = RequestMethod.PUT)
     public ResponseResult updateFace(@RequestBody FaceDto faceDto) {
         log.info("[FaceController] updateFace() 进入更新面部信息方法");
@@ -97,7 +92,6 @@ public class FaceController {
      * @param faceId
      * @return
      */
-    @ApiOperation(value = "queryOne", notes = "传入面部信息编号faceId，查询")
     @RequestMapping(value = "face/{faceId}", method = RequestMethod.GET)
     public ResponseResult queryOne(@PathVariable("faceId") String faceId) {
         log.info("[FaceController] queryOne() 进入查询面部信息方法");
@@ -113,5 +107,17 @@ public class FaceController {
     public ResponseResult queryAll() {
         log.info("[FaceController] queryAll() 进入查询所有面部信息方法");
         return faceService.queryAllFaces();
+    }
+
+    /**
+     * faceLogin: 刷脸登陆
+     *
+     * @param faceBase64Dto
+     * @return
+     */
+    @RequestMapping(value = "login", method = RequestMethod.POST)
+    public ResponseResult faceLogin(@RequestBody FaceBase64Dto faceBase64Dto) {
+        log.info("[FaceController] faceLogin() 进入刷脸登陆方法");
+        return faceService.faceLogin(faceBase64Dto);
     }
 }

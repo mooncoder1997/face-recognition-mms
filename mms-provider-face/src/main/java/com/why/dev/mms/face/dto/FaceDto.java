@@ -22,29 +22,23 @@ public class FaceDto {
 
     private String faceUserId;
 
-    private String faceUserNickname;
-
-    private String faceUserName;
-
     private String faceFeature;
 
-    private String faceCreatedNickname;
+    private String faceCreatedId;
 
-    private String faceUpdatedNickname;
+    private String faceUpdatedId;
 
     private String faceRemarks;
 
     public FaceDto() {
     }
 
-    public FaceDto(String faceId, String faceUserId, String faceUserNickname, String faceUserName, String faceFeature, String faceCreatedNickname, String faceUpdatedNickname, String faceRemarks) {
+    public FaceDto(String faceId, String faceUserId, String faceFeature, String faceCreatedId, String faceUpdatedId, String faceRemarks) {
         this.faceId = faceId;
         this.faceUserId = faceUserId;
-        this.faceUserNickname = faceUserNickname;
-        this.faceUserName = faceUserName;
         this.faceFeature = faceFeature;
-        this.faceCreatedNickname = faceCreatedNickname;
-        this.faceUpdatedNickname = faceUpdatedNickname;
+        this.faceCreatedId = faceCreatedId;
+        this.faceUpdatedId = faceUpdatedId;
         this.faceRemarks = faceRemarks;
     }
 
@@ -64,22 +58,6 @@ public class FaceDto {
         this.faceUserId = faceUserId;
     }
 
-    public String getFaceUserNickname() {
-        return faceUserNickname;
-    }
-
-    public void setFaceUserNickname(String faceUserNickname) {
-        this.faceUserNickname = faceUserNickname;
-    }
-
-    public String getFaceUserName() {
-        return faceUserName;
-    }
-
-    public void setFaceUserName(String faceUserName) {
-        this.faceUserName = faceUserName;
-    }
-
     public String getFaceFeature() {
         return faceFeature;
     }
@@ -88,20 +66,20 @@ public class FaceDto {
         this.faceFeature = faceFeature;
     }
 
-    public String getFaceCreatedNickname() {
-        return faceCreatedNickname;
+    public String getFaceCreatedId() {
+        return faceCreatedId;
     }
 
-    public void setFaceCreatedNickname(String faceCreatedNickname) {
-        this.faceCreatedNickname = faceCreatedNickname;
+    public void setFaceCreatedId(String faceCreatedId) {
+        this.faceCreatedId = faceCreatedId;
     }
 
-    public String getFaceUpdatedNickname() {
-        return faceUpdatedNickname;
+    public String getFaceUpdatedId() {
+        return faceUpdatedId;
     }
 
-    public void setFaceUpdatedNickname(String faceUpdatedNickname) {
-        this.faceUpdatedNickname = faceUpdatedNickname;
+    public void setFaceUpdatedId(String faceUpdatedId) {
+        this.faceUpdatedId = faceUpdatedId;
     }
 
     public String getFaceRemarks() {
@@ -117,10 +95,8 @@ public class FaceDto {
         return "FaceDto{" +
                 "faceId='" + faceId + '\'' +
                 ", faceUserId='" + faceUserId + '\'' +
-                ", faceUserNickname='" + faceUserNickname + '\'' +
-                ", faceUserName='" + faceUserName + '\'' +
-                ", faceCreatedNickname='" + faceCreatedNickname + '\'' +
-                ", faceUpdatedNickname='" + faceUpdatedNickname + '\'' +
+                ", faceCreatedId='" + faceCreatedId + '\'' +
+                ", faceUpdatedId='" + faceUpdatedId + '\'' +
                 ", faceRemarks='" + faceRemarks + '\'' +
                 '}';
     }

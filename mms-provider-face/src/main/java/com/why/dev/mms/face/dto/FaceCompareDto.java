@@ -21,20 +21,14 @@ public class FaceCompareDto {
 
     private String faceUserId;
 
-    private String faceUserNickname;
-
-    private String faceUserName;
-
     private Float similarValue;
 
     public FaceCompareDto() {
     }
 
-    public FaceCompareDto(String faceId, String faceUserId, String faceUserNickname, String faceUserName, Float similarValue) {
+    public FaceCompareDto(String faceId, String faceUserId, Float similarValue) {
         this.faceId = faceId;
         this.faceUserId = faceUserId;
-        this.faceUserNickname = faceUserNickname;
-        this.faceUserName = faceUserName;
         this.similarValue = similarValue;
     }
 
@@ -54,22 +48,6 @@ public class FaceCompareDto {
         this.faceUserId = faceUserId;
     }
 
-    public String getFaceUserNickname() {
-        return faceUserNickname;
-    }
-
-    public void setFaceUserNickname(String faceUserNickname) {
-        this.faceUserNickname = faceUserNickname;
-    }
-
-    public String getFaceUserName() {
-        return faceUserName;
-    }
-
-    public void setFaceUserName(String faceUserName) {
-        this.faceUserName = faceUserName;
-    }
-
     public Float getSimilarValue() {
         return similarValue;
     }
@@ -83,8 +61,6 @@ public class FaceCompareDto {
         return "FaceCompareDto{" +
                 "faceId='" + faceId + '\'' +
                 ", faceUserId='" + faceUserId + '\'' +
-                ", faceUserNickname='" + faceUserNickname + '\'' +
-                ", faceUserName='" + faceUserName + '\'' +
                 ", similarValue=" + similarValue +
                 '}';
     }

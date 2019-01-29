@@ -23,10 +23,6 @@ public class Face {
 
     private String faceUserId;
 
-    private String faceUserNickname;
-
-    private String faceUserName;
-
     private Integer faceAge;
 
     private Integer faceGender;
@@ -35,11 +31,11 @@ public class Face {
 
     private Integer faceIsdel;
 
-    private String faceCreatedNickname;
+    private String faceCreatedId;
 
     private Date faceCreatedTime;
 
-    private String faceUpdatedNickname;
+    private String faceUpdatedId;
 
     private Date faceUpdatedTime;
 
@@ -52,18 +48,16 @@ public class Face {
     public Face() {
     }
 
-    public Face(String faceId, String faceUserId, String faceUserNickname, String faceUserName, Integer faceAge, Integer faceGender, byte[] faceFeature, Integer faceIsdel, String faceCreatedNickname, Date faceCreatedTime, String faceUpdatedNickname, Date faceUpdatedTime, String faceRemarks) {
+    public Face(String faceId, String faceUserId, Integer faceAge, Integer faceGender, byte[] faceFeature, Integer faceIsdel, String faceCreatedId, Date faceCreatedTime, String faceUpdatedId, Date faceUpdatedTime, String faceRemarks) {
         this.faceId = faceId;
         this.faceUserId = faceUserId;
-        this.faceUserNickname = faceUserNickname;
-        this.faceUserName = faceUserName;
         this.faceAge = faceAge;
         this.faceGender = faceGender;
         this.faceFeature = faceFeature;
         this.faceIsdel = faceIsdel;
-        this.faceCreatedNickname = faceCreatedNickname;
+        this.faceCreatedId = faceCreatedId;
         this.faceCreatedTime = faceCreatedTime;
-        this.faceUpdatedNickname = faceUpdatedNickname;
+        this.faceUpdatedId = faceUpdatedId;
         this.faceUpdatedTime = faceUpdatedTime;
         this.faceRemarks = faceRemarks;
     }
@@ -78,22 +72,6 @@ public class Face {
 
     public void setFaceUserId(String faceUserId) {
         this.faceUserId = faceUserId;
-    }
-
-    public String getFaceUserNickname() {
-        return faceUserNickname;
-    }
-
-    public void setFaceUserNickname(String faceUserNickname) {
-        this.faceUserNickname = faceUserNickname;
-    }
-
-    public String getFaceUserName() {
-        return faceUserName;
-    }
-
-    public void setFaceUserName(String faceUserName) {
-        this.faceUserName = faceUserName;
     }
 
     public Integer getFaceAge() {
@@ -128,12 +106,12 @@ public class Face {
         this.faceIsdel = faceIsdel;
     }
 
-    public String getFaceCreatedNickname() {
-        return faceCreatedNickname;
+    public String getFaceCreatedId() {
+        return faceCreatedId;
     }
 
-    public void setFaceCreatedNickname(String faceCreatedNickname) {
-        this.faceCreatedNickname = faceCreatedNickname;
+    public void setFaceCreatedId(String faceCreatedId) {
+        this.faceCreatedId = faceCreatedId;
     }
 
     public Date getFaceCreatedTime() {
@@ -144,12 +122,12 @@ public class Face {
         this.faceCreatedTime = faceCreatedTime;
     }
 
-    public String getFaceUpdatedNickname() {
-        return faceUpdatedNickname;
+    public String getFaceUpdatedId() {
+        return faceUpdatedId;
     }
 
-    public void setFaceUpdatedNickname(String faceUpdatedNickname) {
-        this.faceUpdatedNickname = faceUpdatedNickname;
+    public void setFaceUpdatedId(String faceUpdatedId) {
+        this.faceUpdatedId = faceUpdatedId;
     }
 
     public Date getFaceUpdatedTime() {
@@ -173,14 +151,12 @@ public class Face {
         return "Face{" +
                 "faceId='" + faceId + '\'' +
                 ", faceUserId='" + faceUserId + '\'' +
-                ", faceUserNickname='" + faceUserNickname + '\'' +
-                ", faceUserName='" + faceUserName + '\'' +
                 ", faceAge=" + faceAge +
                 ", faceGender=" + faceGender +
                 ", faceIsdel=" + faceIsdel +
-                ", faceCreatedNickname='" + faceCreatedNickname + '\'' +
+                ", faceCreatedId='" + faceCreatedId + '\'' +
                 ", faceCreatedTime=" + faceCreatedTime +
-                ", faceUpdatedNickname='" + faceUpdatedNickname + '\'' +
+                ", faceUpdatedId='" + faceUpdatedId + '\'' +
                 ", faceUpdatedTime=" + faceUpdatedTime +
                 ", faceRemarks='" + faceRemarks + '\'' +
                 '}';

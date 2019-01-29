@@ -9,6 +9,7 @@ package com.why.dev.mms.face.service;
 
 import com.why.dev.mms.face.dto.*;
 
+import javax.xml.ws.Response;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -32,6 +33,8 @@ public interface FaceService {
     ResponseResult queryFace(String faceId);
 
     ResponseResult queryAllFaces();
+
+    ResponseResult faceLogin(FaceBase64Dto faceBase64Dto);
 
     FaceFeatureDto extractFaceFeature(byte[] imageBytes);
 }

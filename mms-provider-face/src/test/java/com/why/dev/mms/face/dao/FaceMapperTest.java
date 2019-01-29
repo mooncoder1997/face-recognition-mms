@@ -32,9 +32,6 @@ public class FaceMapperTest {
         Face face = new Face();
         face.setFaceId(UUID.randomUUID().toString().replace("-",""));
         face.setFaceUserId(UUID.randomUUID().toString().replace("-",""));
-        face.setFaceUserNickname("Wang, Haoyue");
-        face.setFaceUserName("王皓月");
-        face.setFaceCreatedNickname("Wang, Haoyue");
         int result = faceMapper.insertSelective(face);
         Assert.assertEquals(1, result);
         log.info("[FaceMapperTest] testInsertSelective 成功插入了" + result + "条面部信息");
