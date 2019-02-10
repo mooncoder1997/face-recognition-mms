@@ -10,7 +10,6 @@ package com.why.dev.mms.face.service.impl;
 import com.arcsoft.face.*;
 import com.arcsoft.face.enums.ImageFormat;
 import com.google.common.collect.Lists;
-import com.netflix.discovery.converters.Auto;
 import com.why.dev.mms.face.common.StatusCode;
 import com.why.dev.mms.face.dao.FaceMapper;
 import com.why.dev.mms.face.dto.*;
@@ -28,7 +27,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Base64Utils;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.PostConstruct;
@@ -123,7 +121,7 @@ public class FaceServiceImpl implements FaceService {
                     return new ResponseResult(true, "添加面部信息成功", StatusCode.SUCCESS_POST_PUT_PATCH);
                 } catch (DuplicateKeyException e) {
                     log.info("[FaceServiceImpl] addFace() 添加面部信息出错，违反唯一约束");
-                    return new ResponseResult(false, "用户名错误，请检查用户名是否正确", StatusCode.OPERATIONERROR);
+                    return new ResponseResult(false, "用户已存在面部信息", StatusCode.ERROR_INTERNAL_SERVER_ERROR);
                 }
             }
             log.info("[FaceServiceImpl] addFace() 面部特征提取失败");
@@ -309,7 +307,7 @@ public class FaceServiceImpl implements FaceService {
     @Override
     public ResponseResult faceLogin(FaceBase64Dto faceBase64Dto) {
         log.info("[FaceServiceImpl] faceLogin() 进入刷脸登陆方法");
-        ResponseResult result = null;
+        ResponseResult result;
         try {
             result = compareFace(faceBase64Dto);
         } catch (InterruptedException | ExecutionException e) {
@@ -405,7 +403,7 @@ public class FaceServiceImpl implements FaceService {
         private List<Face> faceList;
         private FaceFeature targetFaceFeature;
 
-        public CompareFaceTask(List<Face> faceList, FaceFeature targetFaceFeature) {
+        CompareFaceTask(List<Face> faceList, FaceFeature targetFaceFeature) {
             this.faceList = faceList;
             this.targetFaceFeature = targetFaceFeature;
         }

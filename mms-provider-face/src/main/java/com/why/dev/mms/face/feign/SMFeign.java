@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * ClassName: SMFeign
- * Description: TODO
+ * Description: 远程调用SM系统管理服务的接口
  * Date: 2019-01-29 10:23
  *
  * @author Wang, Haoyue
