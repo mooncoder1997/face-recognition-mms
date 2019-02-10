@@ -32,6 +32,7 @@ import java.util.concurrent.ExecutionException;
 @Slf4j
 @RestController
 @RequestMapping("/api/v1/face/")
+@Api(value = "人脸Controller", description = "面部信息管理服务 - 人脸模块API")
 public class FaceController {
 
     @Autowired
