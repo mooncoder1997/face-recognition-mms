@@ -9,7 +9,7 @@ package com.why.dev.mms.sm.util;
 
 /**
  * ClassName: MD5Util
- * Description: TODO
+ * Description: MD5工具类
  * Date: 2019-01-18 08:44
  *
  * @author Wang, Haoyue

@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @RequestMapping("/api/v1/user/")
-@Api(value = "UserController", description = "User module API")
+@Api(value = "用户Controller", description = "系统管理服务 - 用户模块API")
 public class UserController {
 
     @Autowired

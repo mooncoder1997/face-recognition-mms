@@ -10,13 +10,14 @@ package com.why.dev.mms.sm.controller;
 import com.why.dev.mms.sm.dto.ResponseResult;
 import com.why.dev.mms.sm.pojo.Role;
 import com.why.dev.mms.sm.service.RoleService;
+import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
  * ClassName: RoleController
- * Description: TODO ADD REASON
+ * Description: 角色信息处理Controller
  * Date: 2018/12/31 10:47 PM
  *
  * @author Wang, Haoyue
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @RequestMapping("/v1/role/")
+@Api(value = "角色Controller", description = "系统管理服务 - 角色模块API")
 public class RoleController {
 
     @Autowired

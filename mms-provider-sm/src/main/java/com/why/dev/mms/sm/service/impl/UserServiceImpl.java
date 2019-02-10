@@ -59,7 +59,6 @@ public class UserServiceImpl implements UserService {
             log.info("[UserServiceImpl] addUser() 参数为空");
             return new ResponseResult(false, "参数为空", StatusCode.ERROR_INVALID_RREQUEST);
         }
-        user.setUserId(UUID.randomUUID().toString().replace("-",""));
         try {
             if (userMapper.insertSelective(user) == 0) {
                 log.info("[UserServiceImpl] addUser() 添加用户信息执行失败");

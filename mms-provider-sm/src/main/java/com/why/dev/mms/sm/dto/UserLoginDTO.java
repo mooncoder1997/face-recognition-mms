@@ -9,7 +9,7 @@ package com.why.dev.mms.sm.dto;
 
 /**
  * ClassName: UserLoginDTO
- * Description: TODO
+ * Description: 封装用户登陆时前端传入的对象
  * Date: 2019-01-18 15:31
  *
  * @author Wang, Haoyue
