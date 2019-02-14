@@ -25,22 +25,36 @@ public class Role {
 
     private Integer roleIsdel;
 
-    private String roleCreatedNickname;
+    private String roleCreatedId;
 
     private Date roleCreatedTime;
 
-    private String roleUpdatedNickname;
+    private String roleUpdatedId;
 
     private Date roleUpdatedTime;
 
     private String roleRemarks;
+
+    public Role() {
+    }
+
+    public Role(String roleId, String roleName, Integer roleIsdel, String roleCreatedId, Date roleCreatedTime, String roleUpdatedId, Date roleUpdatedTime, String roleRemarks) {
+        this.roleId = roleId;
+        this.roleName = roleName;
+        this.roleIsdel = roleIsdel;
+        this.roleCreatedId = roleCreatedId;
+        this.roleCreatedTime = roleCreatedTime;
+        this.roleUpdatedId = roleUpdatedId;
+        this.roleUpdatedTime = roleUpdatedTime;
+        this.roleRemarks = roleRemarks;
+    }
 
     public String getRoleId() {
         return roleId;
     }
 
     public void setRoleId(String roleId) {
-        this.roleId = roleId == null ? null : roleId.trim();
+        this.roleId = roleId;
     }
 
     public String getRoleName() {
@@ -48,7 +62,7 @@ public class Role {
     }
 
     public void setRoleName(String roleName) {
-        this.roleName = roleName == null ? null : roleName.trim();
+        this.roleName = roleName;
     }
 
     public Integer getRoleIsdel() {
@@ -59,12 +73,12 @@ public class Role {
         this.roleIsdel = roleIsdel;
     }
 
-    public String getRoleCreatedNickname() {
-        return roleCreatedNickname;
+    public String getRoleCreatedId() {
+        return roleCreatedId;
     }
 
-    public void setRoleCreatedNickname(String roleCreatedNickname) {
-        this.roleCreatedNickname = roleCreatedNickname == null ? null : roleCreatedNickname.trim();
+    public void setRoleCreatedId(String roleCreatedId) {
+        this.roleCreatedId = roleCreatedId;
     }
 
     public Date getRoleCreatedTime() {
@@ -75,12 +89,12 @@ public class Role {
         this.roleCreatedTime = roleCreatedTime;
     }
 
-    public String getRoleUpdatedNickname() {
-        return roleUpdatedNickname;
+    public String getRoleUpdatedId() {
+        return roleUpdatedId;
     }
 
-    public void setRoleUpdatedNickname(String roleUpdatedNickname) {
-        this.roleUpdatedNickname = roleUpdatedNickname == null ? null : roleUpdatedNickname.trim();
+    public void setRoleUpdatedId(String roleUpdatedId) {
+        this.roleUpdatedId = roleUpdatedId;
     }
 
     public Date getRoleUpdatedTime() {
@@ -96,7 +110,7 @@ public class Role {
     }
 
     public void setRoleRemarks(String roleRemarks) {
-        this.roleRemarks = roleRemarks == null ? null : roleRemarks.trim();
+        this.roleRemarks = roleRemarks;
     }
 
     @Override
@@ -105,9 +119,9 @@ public class Role {
                 "roleId='" + roleId + '\'' +
                 ", roleName='" + roleName + '\'' +
                 ", roleIsdel=" + roleIsdel +
-                ", roleCreatedNickname='" + roleCreatedNickname + '\'' +
+                ", roleCreatedId='" + roleCreatedId + '\'' +
                 ", roleCreatedTime=" + roleCreatedTime +
-                ", roleUpdatedNickname='" + roleUpdatedNickname + '\'' +
+                ", roleUpdatedId='" + roleUpdatedId + '\'' +
                 ", roleUpdatedTime=" + roleUpdatedTime +
                 ", roleRemarks='" + roleRemarks + '\'' +
                 '}';

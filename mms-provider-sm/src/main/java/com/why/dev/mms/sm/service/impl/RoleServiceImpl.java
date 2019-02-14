@@ -130,10 +130,10 @@ public class RoleServiceImpl implements RoleService {
         RoleInfoVO roleInfoVO = new RoleInfoVO();
         roleInfoVO.setRoleId(role.getRoleId());
         roleInfoVO.setRoleName(role.getRoleName());
-        roleInfoVO.setRoleCreatedNickname(role.getRoleCreatedNickname());
+        roleInfoVO.setRoleCreatedId(role.getRoleCreatedId());
         roleInfoVO.setRoleCreatedTime(role.getRoleCreatedTime());
-        if (StringUtils.isBlank(role.getRoleUpdatedNickname())) {
-            roleInfoVO.setRoleUpdatedNickname(role.getRoleUpdatedNickname());
+        if (StringUtils.isBlank(role.getRoleUpdatedId())) {
+            roleInfoVO.setRoleUpdatedId(role.getRoleUpdatedId());
             roleInfoVO.setRoleUpdatedTime(role.getRoleUpdatedTime());
         }
         return roleInfoVO;

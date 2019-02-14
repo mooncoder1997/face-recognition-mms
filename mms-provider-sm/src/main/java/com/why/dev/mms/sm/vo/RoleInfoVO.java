@@ -23,11 +23,11 @@ public class RoleInfoVO {
 
     private String roleName;
 
-    private String roleCreatedNickname;
+    private String roleCreatedId;
 
     private Date roleCreatedTime;
 
-    private String roleUpdatedNickname;
+    private String roleUpdatedId;
 
     private Date roleUpdatedTime;
 
@@ -36,12 +36,12 @@ public class RoleInfoVO {
     public RoleInfoVO() {
     }
 
-    public RoleInfoVO(String roleId, String roleName, String roleCreatedNickname, Date roleCreatedTime, String roleUpdatedNickname, Date roleUpdatedTime, String roleRemarks) {
+    public RoleInfoVO(String roleId, String roleName, String roleCreatedId, Date roleCreatedTime, String roleUpdatedId, Date roleUpdatedTime, String roleRemarks) {
         this.roleId = roleId;
         this.roleName = roleName;
-        this.roleCreatedNickname = roleCreatedNickname;
+        this.roleCreatedId = roleCreatedId;
         this.roleCreatedTime = roleCreatedTime;
-        this.roleUpdatedNickname = roleUpdatedNickname;
+        this.roleUpdatedId = roleUpdatedId;
         this.roleUpdatedTime = roleUpdatedTime;
         this.roleRemarks = roleRemarks;
     }
@@ -62,12 +62,12 @@ public class RoleInfoVO {
         this.roleName = roleName;
     }
 
-    public String getRoleCreatedNickname() {
-        return roleCreatedNickname;
+    public String getRoleCreatedId() {
+        return roleCreatedId;
     }
 
-    public void setRoleCreatedNickname(String roleCreatedNickname) {
-        this.roleCreatedNickname = roleCreatedNickname;
+    public void setRoleCreatedId(String roleCreatedId) {
+        this.roleCreatedId = roleCreatedId;
     }
 
     public Date getRoleCreatedTime() {
@@ -78,12 +78,12 @@ public class RoleInfoVO {
         this.roleCreatedTime = roleCreatedTime;
     }
 
-    public String getRoleUpdatedNickname() {
-        return roleUpdatedNickname;
+    public String getRoleUpdatedId() {
+        return roleUpdatedId;
     }
 
-    public void setRoleUpdatedNickname(String roleUpdatedNickname) {
-        this.roleUpdatedNickname = roleUpdatedNickname;
+    public void setRoleUpdatedId(String roleUpdatedId) {
+        this.roleUpdatedId = roleUpdatedId;
     }
 
     public Date getRoleUpdatedTime() {
@@ -107,9 +107,9 @@ public class RoleInfoVO {
         return "RoleInfoVO{" +
                 "roleId='" + roleId + '\'' +
                 ", roleName='" + roleName + '\'' +
-                ", roleCreatedNickname='" + roleCreatedNickname + '\'' +
+                ", roleCreatedId='" + roleCreatedId + '\'' +
                 ", roleCreatedTime=" + roleCreatedTime +
-                ", roleUpdatedNickname='" + roleUpdatedNickname + '\'' +
+                ", roleUpdatedId='" + roleUpdatedId + '\'' +
                 ", roleUpdatedTime=" + roleUpdatedTime +
                 ", roleRemarks='" + roleRemarks + '\'' +
                 '}';

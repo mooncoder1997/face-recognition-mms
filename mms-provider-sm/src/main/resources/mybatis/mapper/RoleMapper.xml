@@ -7,16 +7,16 @@
         <id column="ROLE_ID" property="roleId" jdbcType="VARCHAR"/>
         <result column="ROLE_NAME" property="roleName" jdbcType="VARCHAR"/>
         <result column="ROLE_ISDEL" property="roleIsdel" jdbcType="INTEGER"/>
-        <result column="ROLE_CREATED_NICKNAME" property="roleCreatedNickname" jdbcType="VARCHAR"/>
+        <result column="ROLE_CREATED_ID" property="roleCreatedId" jdbcType="VARCHAR"/>
         <result column="ROLE_CREATED_TIME" property="roleCreatedTime" jdbcType="TIMESTAMP"/>
-        <result column="ROLE_UPDATED_NICKNAME" property="roleUpdatedNickname" jdbcType="VARCHAR"/>
+        <result column="ROLE_UPDATED_ID" property="roleUpdatedId" jdbcType="VARCHAR"/>
         <result column="ROLE_UPDATED_TIME" property="roleUpdatedTime" jdbcType="TIMESTAMP"/>
         <result column="ROLE_REMARKS" property="roleRemarks" jdbcType="VARCHAR"/>
     </resultMap>
 
     <!-- sql语句通用字段 -->
     <sql id="Base_Column_List">
-        ROLE_ID, ROLE_NAME, ROLE_ISDEL, ROLE_CREATED_NICKNAME, ROLE_CREATED_TIME, ROLE_UPDATED_NICKNAME,
+        ROLE_ID, ROLE_NAME, ROLE_ISDEL, ROLE_CREATED_ID, ROLE_CREATED_TIME, ROLE_UPDATED_ID,
         ROLE_UPDATED_TIME, ROLE_REMARKS
     </sql>
 
@@ -33,14 +33,14 @@
             <if test="roleIsdel != null">
                 ROLE_ISDEL,
             </if>
-            <if test="roleCreatedNickname != null">
-                ROLE_CREATED_NICKNAME,
+            <if test="roleCreatedId != null">
+                ROLE_CREATED_ID,
             </if>
             <if test="roleCreatedTime != null">
                 ROLE_CREATED_TIME,
             </if>
-            <if test="roleUpdatedNickname != null">
-                ROLE_UPDATED_NICKNAME,
+            <if test="roleUpdatedId != null">
+                ROLE_UPDATED_ID,
             </if>
             <if test="roleUpdatedTime != null">
                 ROLE_UPDATED_TIME,
@@ -59,14 +59,14 @@
             <if test="roleIsdel != null">
                 #{roleIsdel,jdbcType=INTEGER},
             </if>
-            <if test="roleCreatedNickname != null">
-                #{roleCreatedNickname,jdbcType=VARCHAR},
+            <if test="roleCreatedId != null">
+                #{roleCreatedId,jdbcType=VARCHAR},
             </if>
             <if test="roleCreatedTime != null">
                 #{roleCreatedTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="roleUpdatedNickname != null">
-                #{roleUpdatedNickname,jdbcType=VARCHAR},
+            <if test="roleUpdatedId != null">
+                #{roleUpdatedId,jdbcType=VARCHAR},
             </if>
             <if test="roleUpdatedTime != null">
                 #{roleUpdatedTime,jdbcType=TIMESTAMP},
@@ -94,14 +94,14 @@
             <if test="roleIsdel != null">
                 ROLE_ISDEL = #{roleIsdel,jdbcType=INTEGER},
             </if>
-            <if test="roleCreatedNickname != null">
-                ROLE_CREATED_NICKNAME = #{roleCreatedNickname,jdbcType=VARCHAR},
+            <if test="roleCreatedId != null">
+                ROLE_CREATED_ID = #{roleCreatedId,jdbcType=VARCHAR},
             </if>
             <if test="roleCreatedTime != null">
                 ROLE_CREATED_TIME = #{roleCreatedTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="roleUpdatedNickname != null">
-                ROLE_UPDATED_NICKNAME = #{roleUpdatedNickname,jdbcType=VARCHAR},
+            <if test="roleUpdatedId != null">
+                ROLE_UPDATED_ID = #{roleUpdatedId,jdbcType=VARCHAR},
             </if>
             <if test="roleUpdatedTime != null">
                 ROLE_UPDATED_TIME = #{roleUpdatedTime,jdbcType=TIMESTAMP},
