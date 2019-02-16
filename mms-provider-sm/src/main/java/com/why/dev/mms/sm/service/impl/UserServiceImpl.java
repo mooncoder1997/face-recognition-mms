@@ -209,6 +209,9 @@ public class UserServiceImpl implements UserService {
             userInfoVO.setUserUpdatedId(user.getUserUpdatedId());
             userInfoVO.setUserUpdatedTime(user.getUserUpdatedTime());
         }
+        if (user.getUserRemarks() != null) {
+            userInfoVO.setUserRemarks(user.getUserRemarks());
+        }
         return userInfoVO;
     }
 }

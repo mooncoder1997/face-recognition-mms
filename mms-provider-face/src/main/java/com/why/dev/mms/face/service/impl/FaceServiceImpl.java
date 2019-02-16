@@ -170,11 +170,17 @@ public class FaceServiceImpl implements FaceService {
                     allFaceCompareDtoList.addAll(resultFaceCompareDtoList);
                 }
                 log.info("[FaceServiceImpl] compareFace() 共有" + allFaceCompareDtoList.size() + "条相似的面部信息");
+                if (allFaceCompareDtoList.size() == 0) {
+                    log.info("[FaceServiceImpl] compareFace() 没有找到符合的人脸!");
+                    return new ResponseResult(false, "未找到匹配的用户", StatusCode.ERROR_INVALID_RREQUEST);
+                }
                 allFaceCompareDtoList.sort((h1, h2) -> h2.getSimilarValue().compareTo(h1.getSimilarValue()));
                 FaceCompareDto faceCompareDto = allFaceCompareDtoList.get(0);
                 log.info("[FaceServiceImpl] compareFace() 查找出最相似的面部信息: " + faceCompareDto.toString());
                 return new ResponseResult(faceCompareDto, true, "面部特征比对成功", StatusCode.SUCCESS_POST_PUT_PATCH);
             }
+            log.info("[FaceServiceImpl] compareFace() 提取特征值失败!");
+            return new ResponseResult(false, "人脸照片错误", StatusCode.ERROR_INVALID_RREQUEST);
         }
         log.info("[FaceServiceImpl] compareFace() 面部图片Base64字符串为空");
         return new ResponseResult(false, "参数为空", StatusCode.ERROR_INVALID_RREQUEST);
@@ -369,6 +375,9 @@ public class FaceServiceImpl implements FaceService {
                     faceFeatureDto.setFaceNumber(faceInfoList.size());
                     log.info("[FaceServiceImpl] extractFaceFeature() 提取到的面部信息: " + faceFeatureDto.toString());
                     return faceFeatureDto;
+                } else {
+                    log.info("FaceServiceImpl] extractFaceFeature() 没有识别到人脸");
+                    return null;
                 }
             } catch (Exception e) {
                 log.info("FaceServiceImpl] extractFaceFeature() 提取面部特征信息出错");

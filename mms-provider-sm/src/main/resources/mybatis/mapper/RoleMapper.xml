@@ -133,6 +133,6 @@
         <include refid="Base_Column_List"/>
         from SM_ROLE
         where ROLE_ISDEL = 1
-        order by ROLE_NAME
+        order by ROLE_ID
     </select>
 </mapper>
