@@ -31,14 +31,13 @@ public class UserMapperTest {
     public void testInsertSelective() {
         User user = new User();
         user.setUserId(UUID.randomUUID().toString().replace("-",""));
-        user.setUserName("王皓月");
+        user.setUserName("测试1");
         user.setUserPassword("123456");
-        user.setUserGender(0);
-        user.setUserEmail("Haoyue.Wang@qq.com");
-        user.setUserMobile("18630881233");
-        user.setUserRoleId(UUID.randomUUID().toString().replace("-",""));
+        user.setUserGender("男");
+        user.setUserEmail("Ce, Shi1@qq.com");
+        user.setUserMobile("10000000001");
+        user.setUserRoleName("user");
         user.setUserFaceId("F0000000000000000000000000000001");
-        user.setUserCreatedId("U000000001");
         int result = userMapper.insertSelective(user);
         Assert.assertEquals(1, result);
         log.info("[UserMapperTest] testInsertSelective 成功插入了" + result + "条用户信息");
@@ -46,18 +45,24 @@ public class UserMapperTest {
 
     @Test
     public void testDeleteByPrimaryKey() {
-        int result = userMapper.deleteByPrimaryKey("U0000000000000000000000000000001");
+        int result = userMapper.deleteByPrimaryKey("5226fad220564e4d8c1990d5f1a03fc2");
         Assert.assertEquals(1, result);
         log.info("[UserMapperTest] testDeleteByPrimaryKey 成功删除了" + result + "条用户信息");
     }
 
     @Test
     public void testUpdateByPrimaryKeySelective() {
+        User user = new User();
+        user.setUserId("662bf5cf371243a3b4eb35a9681985ae");
+        user.setUserGender("女");
+        int result = userMapper.updateByPrimaryKeySelective(user);
+        Assert.assertEquals(1, result);
+        log.info("[UserMapperTest] testInsertSelective 成功更新了" + result + "条用户信息");
     }
 
     @Test
     public void testSelectByPrimaryKey() {
-        User user = userMapper.selectByPrimaryKey("U0000000000000000000000000000001");
+        User user = userMapper.selectByPrimaryKey("662bf5cf371243a3b4eb35a9681985ae");
         if (user == null) {
             log.info("[UserMapperTest] testSelectByPrimaryKey 查询用户信息失败" );
         }

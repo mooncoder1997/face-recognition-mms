@@ -7,7 +7,6 @@
  */
 package com.why.dev.mms.sm.dao;
 
-import com.why.dev.mms.sm.pojo.Role;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -24,15 +23,5 @@ import java.util.List;
 @Mapper
 public interface RoleMapper {
 
-    int insertSelective(Role record);
-
-    int deleteByPrimaryKey(String roleId);
-
-    int updateByPrimaryKeySelective(Role record);
-
-    Role selectByPrimaryKey(String roleId);
-
-    String selectRoleNameByPrimiaryKey(String roleId);
-
-    List<Role> findAllRole();
+    List<String> findAllRole();
 }
