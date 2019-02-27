@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.why.dev.mms.mm.dao.RoomMapper">
+
+    <!-- 数据库与JavaBean关系映射 -->
+    <resultMap id="BaseResultMap" type="com.why.dev.mms.mm.pojo.Room">
+        <id column="ROOM_NAME" property="roomName" jdbcType="VARCHAR"/>
+        <result column="ROOM_LOCATION" property="roomLocation" jdbcType="VARCHAR"/>
+        <result column="ROOM_PEOPLE" property="roomPeople" jdbcType="INTEGER"/>
+        <result column="ROOM_REMARKS" property="roomRemarks" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!-- sql语句通用字段 -->
+    <sql id="Base_Column_List">
+        ROOM_NAME, ROOM_LOCATION, ROOM_PEOPLE, ROOM_REMARKS
+    </sql>
+
+    <!-- 动态添加的sql实现，动态拼接sql语句，若属性不为空，则拼接入sql语句；否则不进行拼接 -->
+    <insert id="insertSelective" parameterType="com.why.dev.mms.mm.pojo.Room">
+        insert into MM_ROOM
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="roomName != null">
+                ROOM_NAME,
+            </if>
+            <if test="roomLocation != null">
+                ROOM_LOCATION,
+            </if>
+            <if test="roomPeople != null">
+                ROOM_PEOPLE,
+            </if>
+            <if test="roomRemarks != null">
+                ROOM_REMARKS,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="roomName != null">
+                #{roomName,jdbcType=VARCHAR},
+            </if>
+            <if test="roomLocation != null">
+                #{roomLocation,jdbcType=VARCHAR},
+            </if>
+            <if test="roomPeople != null">
+                #{roomPeople,jdbcType=INTEGER},
+            </if>
+            <if test="roomRemarks != null">
+                #{roomRemarks,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <!-- 主键删除的sql实现 -->
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from MM_ROOM
+        where ROOM_NAME = #{roomName,jdbcType=VARCHAR}
+    </delete>
+
+    <!-- 动态拼接sql语句，进行动态修改 -->
+    <update id="updateByPrimaryKeySelective" parameterType="com.why.dev.mms.mm.pojo.Room">
+        update MM_ROOM
+        <set>
+            <if test="roomLocation != null">
+                ROOM_LOCATION = #{roomLocation,jdbcType=VARCHAR},
+            </if>
+            <if test="roomPeople != null">
+                ROOM_PEOPLE = #{roomPeople,jdbcType=VARCHAR},
+            </if>
+            <if test="roomRemarks != null">
+                ROOM_REMARKS = #{roomRemarks,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ROOM_NAME = #{roomName,jdbcType=VARCHAR}
+    </update>
+
+    <!-- 主键查询的sql实现 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from MM_ROOM
+        where ROOM_NAME = #{roomName,jdbcType=VARCHAR}
+    </select>
+
+    <!-- 获取所有的集合sql实现 -->
+    <select id="findAllRoom" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from MM_ROOM
+        order by ROOM_NAME
+    </select>
+</mapper>

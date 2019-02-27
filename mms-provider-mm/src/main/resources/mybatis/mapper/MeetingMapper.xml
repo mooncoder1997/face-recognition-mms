@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.why.dev.mms.mm.dao.MeetingMapper">
+
+    <!-- 数据库与JavaBean关系映射 -->
+    <resultMap id="BaseResultMap" type="com.why.dev.mms.mm.pojo.Meeting">
+        <id column="MEETING_ID" property="meetingId" jdbcType="VARCHAR"/>
+        <result column="MEETING_USER_ID" property="meetingUserId" jdbcType="VARCHAR"/>
+        <result column="MEETING_NAME" property="meetingName" jdbcType="VARCHAR"/>
+        <result column="MEETING_TOPIC" property="meetingTopic" jdbcType="VARCHAR"/>
+        <result column="MEETING_ROOM_NAME" property="meetingRoomName" jdbcType="VARCHAR"/>
+        <result column="MEETING_START_TIME" property="meetingStartTime" jdbcType="VARCHAR"/>
+        <result column="MEETING_END_TIME" property="meetingEndTime" jdbcType="VARCHAR"/>
+        <result column="MEETING_REMARKS" property="meetingRemarks" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!-- sql语句通用字段 -->
+    <sql id="Base_Column_List">
+        MEETING_ID, MEETING_USER_ID, MEETING_NAME, MEETING_TOPIC,
+        MEETING_ROOM_NAME,MEETING_START_TIME, MEETING_END_TIME, MEETING_REMARKS
+    </sql>
+
+    <!-- 动态添加的sql实现，动态拼接sql语句，若属性不为空，则拼接入sql语句；否则不进行拼接 -->
+    <insert id="insertSelective" parameterType="com.why.dev.mms.mm.pojo.Meeting">
+        insert into MM_MEETING
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="meetingId != null">
+                MEETING_ID,
+            </if>
+            <if test="meetingUserId != null">
+                MEETING_USER_ID,
+            </if>
+            <if test="meetingName != null">
+                MEETING_NAME,
+            </if>
+            <if test="meetingTopic != null">
+                MEETING_TOPIC,
+            </if>
+            <if test="meetingRoomName != null">
+                MEETING_ROOM_NAME,
+            </if>
+            <if test="meetingStartTime != null">
+                MEETING_START_TIME,
+            </if>
+            <if test="meetingEndTime != null">
+                MEETING_END_TIME,
+            </if>
+            <if test="meetingRemarks != null">
+                MEETING_REMARKS,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="meetingId != null">
+                #{meetingId,jdbcType=VARCHAR},
+            </if>
+            <if test="meetingUserId != null">
+                #{meetingUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="meetingName != null">
+                #{meetingName,jdbcType=VARCHAR},
+            </if>
+            <if test="meetingTopic != null">
+                #{meetingTopic,jdbcType=VARCHAR},
+            </if>
+            <if test="meetingRoomName != null">
+                #{meetingRoomName,jdbcType=VARCHAR},
+            </if>
+            <if test="meetingStartTime != null">
+                #{meetingStartTime,jdbcType=VARCHAR},
+            </if>
+            <if test="meetingEndTime != null">
+                #{meetingEndTime,jdbcType=VARCHAR},
+            </if>
+            <if test="meetingRemarks != null">
+                #{meetingRemarks,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <!-- 主键删除的sql实现 -->
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from MM_MEETING
+        where MEETING_ID = #{meetingId,jdbcType=VARCHAR}
+    </delete>
+
+    <!-- 动态拼接sql语句，进行动态修改 -->
+    <update id="updateByPrimaryKeySelective" parameterType="com.why.dev.mms.mm.pojo.Meeting">
+        update MM_MEETING
+        <set>
+            <if test="meetingUserId != null">
+                MEETING_USER_ID = #{meetingUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="meetingName != null">
+                MEETING_NAME = #{meetingName,jdbcType=VARCHAR},
+            </if>
+            <if test="meetingTopic != null">
+                MEETING_TOPIC = #{meetingTopic,jdbcType=VARCHAR},
+            </if>
+            <if test="meetingRoomName != null">
+                MEETING_ROOM_NAME = #{meetingRoomName,jdbcType=VARCHAR},
+            </if>
+            <if test="meetingStartTime != null">
+                MEETING_START_TIME = #{meetingStartTime,jdbcType=VARCHAR},
+            </if>
+            <if test="meetingEndTime != null">
+                METING_END_TIME = #{meetingEndTime,jdbcType=VARCHAR},
+            </if>
+            <if test="meetingRemarks != null">
+                MEETING_REMARKS = #{meetingRemarks,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where MEETING_ID = #{meetingId,jdbcType=VARCHAR}
+    </update>
+
+    <!-- 主键查询的sql实现 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from MM_MEETING
+        where MEETING_ID = #{meetingId,jdbcType=VARCHAR}
+    </select>
+
+    <!-- 获取所有的集合sql实现 -->
+    <select id="findAllMeeting" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from MM_MEETING
+        order by MEETING_NAME
+    </select>
+</mapper>
