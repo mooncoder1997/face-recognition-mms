@@ -22,3 +22,8 @@ scp mms-provider-face-1.0-SNAPSHOT.jar root@58.87.120.47:/home/downloads/runable
 ```
 java -jar mms-provider-face-1.0-SNAPSHOT.jar
 ```
+
+## 查看正在运行的进程
+```
+ps -ef | grep java
+```
