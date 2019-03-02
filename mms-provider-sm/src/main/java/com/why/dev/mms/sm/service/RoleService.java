@@ -34,13 +34,13 @@ public class RoleService {
     private RoleMapper roleMapper;
 
     public ResponseResult queryAllRoles() {
-        log.info("[RoleServiceImpl] queryAllRoles() 进入查询角色方法");
+        log.info("[RoleService] queryAllRoles() 进入查询角色方法");
         List<String> roleList = roleMapper.findAllRole();
         if (CollectionUtils.isEmpty(roleList)) {
-            log.info("[RoleServiceImpl] queryAllRoles() 没有查到角色");
+            log.info("[RoleService] queryAllRoles() 没有查到角色");
             return new ResponseResult(false, "没有查到角色", StatusCode.OPERATIONERROR);
         }
-        log.info("[RoleServiceImpl] queryAllRoles() 查询所有角色成功，共查到" + roleList.size() + "个角色");
+        log.info("[RoleService] queryAllRoles() 查询所有角色成功，共查到" + roleList.size() + "个角色");
         return new ResponseResult(roleList, true, "查询角色成功", StatusCode.SUCCESS_GET);
     }
 }
