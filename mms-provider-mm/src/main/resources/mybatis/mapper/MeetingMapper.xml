@@ -9,15 +9,16 @@
         <result column="MEETING_NAME" property="meetingName" jdbcType="VARCHAR"/>
         <result column="MEETING_TOPIC" property="meetingTopic" jdbcType="VARCHAR"/>
         <result column="MEETING_ROOM_NAME" property="meetingRoomName" jdbcType="VARCHAR"/>
-        <result column="MEETING_START_TIME" property="meetingStartTime" jdbcType="VARCHAR"/>
-        <result column="MEETING_END_TIME" property="meetingEndTime" jdbcType="VARCHAR"/>
+        <result column="MEETING_DATE" property="meetingDate" jdbcType="DATE"/>
+        <result column="MEETING_START_TIME" property="meetingStartTime" jdbcType="TIME"/>
+        <result column="MEETING_END_TIME" property="meetingEndTime" jdbcType="TIME"/>
         <result column="MEETING_REMARKS" property="meetingRemarks" jdbcType="VARCHAR"/>
     </resultMap>
 
     <!-- sql语句通用字段 -->
     <sql id="Base_Column_List">
-        MEETING_ID, MEETING_USER_ID, MEETING_NAME, MEETING_TOPIC,
-        MEETING_ROOM_NAME,MEETING_START_TIME, MEETING_END_TIME, MEETING_REMARKS
+        MEETING_ID, MEETING_USER_ID, MEETING_NAME, MEETING_TOPIC, MEETING_ROOM_NAME,
+        MEETING_DATE, MEETING_START_TIME, MEETING_END_TIME, MEETING_REMARKS
     </sql>
 
     <!-- 动态添加的sql实现，动态拼接sql语句，若属性不为空，则拼接入sql语句；否则不进行拼接 -->
@@ -38,6 +39,9 @@
             </if>
             <if test="meetingRoomName != null">
                 MEETING_ROOM_NAME,
+            </if>
+            <if test="meetingDate != null">
+                MEETING_DATE,
             </if>
             <if test="meetingStartTime != null">
                 MEETING_START_TIME,
@@ -65,11 +69,14 @@
             <if test="meetingRoomName != null">
                 #{meetingRoomName,jdbcType=VARCHAR},
             </if>
+            <if test="meetingDate != null">
+                #{meetingDate,jdbcType=DATE},
+            </if>
             <if test="meetingStartTime != null">
-                #{meetingStartTime,jdbcType=VARCHAR},
+                #{meetingStartTime,jdbcType=TIME},
             </if>
             <if test="meetingEndTime != null">
-                #{meetingEndTime,jdbcType=VARCHAR},
+                #{meetingEndTime,jdbcType=TIME},
             </if>
             <if test="meetingRemarks != null">
                 #{meetingRemarks,jdbcType=VARCHAR},
@@ -99,11 +106,14 @@
             <if test="meetingRoomName != null">
                 MEETING_ROOM_NAME = #{meetingRoomName,jdbcType=VARCHAR},
             </if>
+            <if test="meetingDate != null">
+                MEETING_DATE = #{meetingDate,jdbcType=DATE},
+            </if>
             <if test="meetingStartTime != null">
-                MEETING_START_TIME = #{meetingStartTime,jdbcType=VARCHAR},
+                MEETING_START_TIME = #{meetingStartTime,jdbcType=TIME},
             </if>
             <if test="meetingEndTime != null">
-                METING_END_TIME = #{meetingEndTime,jdbcType=VARCHAR},
+                METING_END_TIME = #{meetingEndTime,jdbcType=TIME},
             </if>
             <if test="meetingRemarks != null">
                 MEETING_REMARKS = #{meetingRemarks,jdbcType=VARCHAR},
@@ -118,6 +128,13 @@
         <include refid="Base_Column_List"/>
         from MM_MEETING
         where MEETING_ID = #{meetingId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectByRoomNameAndDate" resultMap="BaseResultMap" parameterType="com.why.dev.mms.mm.dto.QueryAvaliableTimeDto">
+        select
+        <include refid="Base_Column_List"/>
+        from MM_MEETING
+        where MEETING_ROOM_NAME = #{roomName,jdbcType=VARCHAR} and MEETING_DATE = #{roomDate,jdbcType=DATE};
     </select>
 
     <!-- 获取所有的集合sql实现 -->

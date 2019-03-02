@@ -1,5 +1,6 @@
 package com.why.dev.mms.mm.dao;
 
+import com.why.dev.mms.mm.dto.QueryAvaliableTimeDto;
 import com.why.dev.mms.mm.pojo.Meeting;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
@@ -35,7 +36,8 @@ public class MeetingMapperTest {
         meeting.setMeetingUserId("U000000001");
         meeting.setMeetingName("测试会议1");
         meeting.setMeetingTopic("测试会议主题1");
-        meeting.setMeetingRoomName("测试会议室1");
+        meeting.setMeetingRoomName("MeetingRoom1");
+        meeting.setMeetingDate(new Date());
         meeting.setMeetingStartTime(new Date());
         meeting.setMeetingEndTime(new Date());
         int result = meetingMapper.insertSelective(meeting);
@@ -62,12 +64,26 @@ public class MeetingMapperTest {
 
     @Test
     public void testSelectByPrimaryKey() {
-        Meeting meeting = meetingMapper.selectByPrimaryKey("4a57e196f6ee4a00a0bc5664870424b8");
+        Meeting meeting = meetingMapper.selectByPrimaryKey("02825d1867e0405f8a037b28ea90b776");
         if (meeting == null) {
             log.info("[MeetingMapperTest] testSelectByPrimaryKey 查询会议信息失败" );
         }
         Assert.assertNotNull(meeting);
         log.info("[MeetingMapperTest] testSelectByPrimaryKey 成功查到1条会议信息: " + meeting.toString());
+    }
+
+    @Test
+    public void testSelectByRoomNameAndDate() {
+        QueryAvaliableTimeDto queryAvaliableTimeDto = new QueryAvaliableTimeDto();
+        queryAvaliableTimeDto.setRoomName("MeetingRoom1");
+        queryAvaliableTimeDto.setRoomDate(new Date());
+        List<Meeting> meetingList = meetingMapper.selectByRoomNameAndDate(queryAvaliableTimeDto);
+        if (meetingList == null) {
+            log.info("[MeetingMapperTest] testSelectByRoomNameAndDate 查询会议信息失败" );
+        }
+        Assert.assertNotNull(meetingList);
+        log.info("[MeetingMapperTest] testSelectByRoomNameAndDate 成功查到" + meetingList.size() + "条会议信息");
+        meetingList.forEach(meeting -> log.info(meeting.toString()));
     }
 
     @Test
@@ -78,5 +94,6 @@ public class MeetingMapperTest {
         }
         Assert.assertNotNull(meetingList);
         log.info("[MeetingMapperTest] testFindAllMeeting 成功查到" + meetingList.size() + "条会议信息");
+        meetingList.forEach(meeting -> log.info(meeting.toString()));
     }
 }

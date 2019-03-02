@@ -1,6 +1,6 @@
 /**
  * Project Name: face-recognition-mms
- * File Name: RoomMapper
+ * File Name: RoomMapper.java
  * Package Name: com.why.dev.mms.mm.dao
  * Date: 2019-02-27 00:13
  * Copyright (c) 2019, Wang, Haoyue All Rights Reserved.
@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  * ClassName: RoomMapper
- * Description: TODO
+ * Description: 会议室信息映射接口
  * Date: 2019-02-27 00:13
  *
  * @author Wang, Haoyue

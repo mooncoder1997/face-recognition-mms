@@ -1,6 +1,6 @@
 /**
  * Project Name: face-recognition-mms
- * File Name: Room
+ * File Name: Room.java
  * Package Name: com.why.dev.mms.mm.pojo
  * Date: 2019-02-27 00:09
  * Copyright (c) 2019, Wang, Haoyue All Rights Reserved.
@@ -14,7 +14,7 @@ import lombok.ToString;
 
 /**
  * ClassName: Room
- * Description: TODO
+ * Description: 数据库MM_ROOM表实体类
  * Date: 2019-02-27 00:09
  *
  * @author Wang, Haoyue
