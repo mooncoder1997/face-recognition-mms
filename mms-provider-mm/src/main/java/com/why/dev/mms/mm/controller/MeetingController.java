@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Slf4j
 @RestController
-@RequestMapping("/api/v1/meeting")
+@RequestMapping("/mm/api/v1/meeting")
 public class MeetingController {
 
     @Autowired
@@ -96,6 +96,7 @@ public class MeetingController {
     public ResponseResult queryAT(String roomName, String roomDate) {
         log.info("[MeetingController] queryAT() 进入查询可预定时段方法");
         QueryAvaliableTimeDto queryAvaliableTimeDto = new QueryAvaliableTimeDto(roomName, DateUtil.stringToDate(roomDate));
+        log.info("[MeetingController] queryAT() queryAvaliableTimeDto: " + queryAvaliableTimeDto.toString());
         return meetingService.queryAvaliableTime(queryAvaliableTimeDto);
     }
 }

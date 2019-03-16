@@ -8,6 +8,7 @@
 package com.why.dev.mms.mm.util;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,12 +23,11 @@ import java.util.Date;
  * @version V1.0
  * @since JDK 1.8
  */
+@Component
 public class DateUtil {
 
-    @Value("${mm.meeting.start}")
     private static String startTime;
 
-    @Value("${mm.meeting.end}")
     private static String endTime;
 
     /**
@@ -86,10 +86,20 @@ public class DateUtil {
     public static Date endTime() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
         try {
-            return simpleDateFormat.parse(endTime);
+            return simpleDateFormat.parse("20:00:00");
         } catch (ParseException e) {
             e.printStackTrace();
             return null;
         }
+    }
+
+    @Value("${mm.meeting.start}")
+    public void setStartTime(String startTime) {
+        DateUtil.startTime = startTime;
+    }
+
+    @Value("${mm.meeting.end}")
+    public void setEndTime(String endTime) {
+        DateUtil.endTime = endTime;
     }
 }

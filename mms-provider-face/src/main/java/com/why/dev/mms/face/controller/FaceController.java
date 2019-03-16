@@ -12,8 +12,6 @@ import com.why.dev.mms.face.dto.FaceDto;
 import com.why.dev.mms.face.dto.ResponseResult;
 import com.why.dev.mms.face.service.FaceService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +29,7 @@ import java.util.concurrent.ExecutionException;
  */
 @Slf4j
 @RestController
-@RequestMapping("/api/v1/face/")
+@RequestMapping("/fm/api/v1/face/")
 @Api(value = "人脸Controller", description = "面部信息管理服务 - 人脸模块API")
 public class FaceController {
 

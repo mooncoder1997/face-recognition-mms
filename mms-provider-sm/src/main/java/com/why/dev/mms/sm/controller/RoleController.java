@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Slf4j
 @RestController
-@RequestMapping("/v1/role/")
+@RequestMapping("/sm/api/v1/role/")
 @Api(value = "角色Controller", description = "系统管理服务 - 角色模块API")
 public class RoleController {
 

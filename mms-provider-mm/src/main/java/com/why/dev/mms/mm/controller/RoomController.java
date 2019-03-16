@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Slf4j
 @RestController
-@RequestMapping("/api/v1/room/")
+@RequestMapping("/mm/api/v1/room/")
 public class RoomController {
 
     @Autowired
