@@ -25,6 +25,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @FeignClient(name = "mms-provider-sm")
 public interface SMFeign {
 
-    @RequestMapping(value = "/api/v1/user/user/{userId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/sm/api/v1/user/user/{userId}", method = RequestMethod.GET)
     ResponseResult getUserInfoByUserId(@PathVariable("userId") String userId);
 }
